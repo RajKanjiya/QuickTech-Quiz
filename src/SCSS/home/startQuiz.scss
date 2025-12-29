@@ -1,0 +1,289 @@
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
+.hero {
+  background: var(--bg-gradient);
+  color: white;
+  /* Removed simple padding, using flex to center vertical content */
+  width: 100svw;
+  height: 90svh; /* Adjusted height to fit navbar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //border-radius: 0 0 5rem 5rem;
+  margin-bottom: 4rem;
+  position: relative;
+  overflow: hidden; /* Keeps floating elements inside */
+
+  .hero-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 120rem; /* Matches your grid container max-width */
+    padding: 0 5%;
+    gap: 4rem;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  /* Left Side: Text */
+  .hero-text {
+    flex: 1;
+    text-align: left; /* Align text left for desktop */
+    z-index: 2;
+
+    h1 {
+      font-size: 4.5rem; /* Slightly larger */
+      margin-bottom: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1.8rem;
+      opacity: 0.9;
+      margin-bottom: 3rem;
+      max-width: 55rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      text-align: center;
+
+      p {
+        margin: 0 auto 3rem auto;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 3.7rem;
+      }
+
+      p {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  /* Right Side: Visuals */
+  .hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    @media (max-width: 900px) {
+      display: none; /* Hide visual on mobile to keep it clean */
+    }
+  }
+}
+
+/* =========================================
+   FLOATING ELEMENTS (NEW)
+   ========================================= */
+.visual-box {
+  position: relative;
+  width: 40rem;
+  height: 35rem;
+  background: rgba(255, 255, 255, 0.1); /* Glass effect */
+  backdrop-filter: blur(10px);
+  border-radius: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+  .main-icon {
+    font-size: 12rem;
+    color: white;
+    opacity: 0.9;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  }
+}
+
+.floating-card {
+  position: absolute;
+  background: white;
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: float 4s ease-in-out infinite;
+
+  span {
+    color: var(--text-main, #333);
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  /* Top Left Card */
+  &.card-top {
+    top: 4rem;
+    left: -4rem;
+    animation-delay: 0s;
+
+    .icon-success {
+      color: #2ecc71;
+      font-size: 2rem;
+    }
+  }
+
+  /* Bottom Right Card */
+  &.card-bottom {
+    bottom: 5rem;
+    right: -3rem;
+    animation-delay: 2s;
+
+    .icon-js {
+      color: #f7df1e;
+      font-size: 2rem;
+    }
+  }
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   4. BUTTONS & ACTIONS
+   ========================================= */
+.cta-btn {
+  background: var(--surface-color);
+  color: var(--primary-color);
+  padding: 1.2rem 3rem; /* 12px 30px */
+  border-radius: 3rem; /* 30px radius */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.6rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-0.3rem); /* -3px */
+  }
+
+  &.disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+.action-area {
+  text-align: center;
+  margin-top: 4rem; /* 40px */
+  height: 6rem; /* 60px */
+}
+
+/* =========================================
+   5. MAIN LAYOUT & GRID
+   ========================================= */
+.gird__container {
+  max-width: 120rem; /* 1200px */
+  margin: 0 auto;
+  padding: 0 5% 5rem;
+
+  .section-title {
+    margin-bottom: 3rem; /* 30px */
+    font-size: 2.4rem; /* 24px */
+    color: var(--text-main);
+    border-left: 0.5rem solid var(--primary-color); /* 5px border */
+    padding-left: 1.5rem; /* 15px */
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(25rem, 1fr)); /* min 250px */
+  gap: 3rem; /* 30px */
+}
+
+/* =========================================
+   6. SUBJECT CARD COMPONENT
+   ========================================= */
+.subject-card {
+  background: var(--surface-color);
+  border-radius: 2rem; /* 20px */
+  padding: 2.5rem; /* 25px */
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  border: 0.2rem solid transparent; /* 2px border */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  .icon-box {
+    width: 6rem; /* 60px */
+    height: 6rem; /* 60px */
+    background: var(--input-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem; /* 20px bottom margin */
+    font-size: 2.5rem; /* 25px icon size */
+    color: var(--primary-color);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem; /* 18px */
+    color: var(--text-main);
+  }
+
+  /* HOVER STATE */
+  &:hover {
+    transform: translateY(-0.5rem); /* -5px */
+    box-shadow: var(--shadow-card);
+  }
+
+  /* SELECTED STATE */
+  &.selected {
+    border-color: var(--primary-color);
+    background: #eef6ff;
+    transform: scale(1.05);
+
+    .icon-box {
+      background: var(--bg-gradient);
+      color: white;
+      box-shadow: 0 0.4rem 1rem rgba(43, 139, 242, 0.4);
+    }
+  }
+}
+
+

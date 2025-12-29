@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login/SignUp</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="../SCSS/style.scss" rel="stylesheet">
+</head>
+<body>
+<div class="login__container">
+
+    <div class="login__box">
+        <!--        <div class="login__box__img">-->
+
+        <!--        </div>-->
+
+        <div class="login__box__frm">
+            <div class="tabs">
+                <div class="btn--active" id="loginDiv">
+                    <button class="form__btn" id="login">Login</button>
+                </div>
+                <div class="" id="signUpDiv">
+                    <button class="form__btn" id="signUp">Sign Up</button>
+                </div>
+            </div>
+
+            <div class="forms">
+
+                <form class="loginForm active" method="post" name="loginForm">
+                    <input id="loginEmail" name="loginEmail" placeholder="Email" type="text">
+                    <input id="loginPass" name="loginPass" placeholder="Password" type="text">
+                    <a class="forgotPass" href="">
+                        Forgot Password?
+                    </a>
+                    <span class="errorSpan hidden" id="loginError">invalid Email or Password</span>
+                    <button class="loginBtn" type="submit">Login</button>
+                </form>
+
+                <form class="signUpForm" name="signUpForm">
+                    <input id="signupUsername" name="" placeholder="User Name" type="text">
+                    <input id="signupEmail" name="" placeholder="Email" type="text">
+                    <input id="signupPass" name="" placeholder="Password" type="text">
+                    <span class="errorSpan hidden" id="signUpError">Please enter valid Email and Password</span>
+                    <button class="signUpBtn" type="submit">Sign Up</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="../TS/login.ts" type="module"></script>
+</body>
+</html>

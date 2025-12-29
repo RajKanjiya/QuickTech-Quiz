@@ -1,0 +1,56 @@
+@use 'home/navbar';
+@use "home/startQuiz";
+@use "root";
+@use 'login';
+
+.container {
+  height: 100svh;
+  width: 100svw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.active {
+  display: flex;
+  visibility: visible;
+}
+
+html {
+  /* THIS IS THE MAGIC LINE */
+  /* Default browser font is 16px. 62.5% of 16px = 10px. */
+  /* So now: 1rem = 10px */
+  font-size: 62.5%;
+  //font-size: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f0f4f8;
+  color: var(--text-main);
+  //font-size: 1.6rem;
+}

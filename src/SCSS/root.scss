@@ -1,0 +1,36 @@
+:root {
+  font-family: "Arimo", sans-serif;
+  line-height: 1.5;
+  font-weight: 700;
+  font-size: 10px;
+
+  //color-scheme: dark light;
+  //color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Brand Colors */
+  --primary-color: #2b8bf2;
+  --primary-hover: #1f6dc4;
+  --accent-color: #00f2fe;
+
+
+  /* Backgrounds */
+  --bg-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --surface-color: #ffffff;
+  --input-bg: #f8f9fa;
+  --bg-white: #ffffff;
+
+  /* Text */
+  --text-main: #2d3748;
+  --text-muted: #718096;
+  --text-white: #ffffff;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 10px 20px rgba(0, 0, 0, 0.08);
+
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Home | QuickTech-quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="src/SCSS/style.scss" rel="stylesheet">
+</head>
+<body style="overflow: hidden">
+
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-brain"></i> QuickTech-quiz
+    </div>
+
+    <div class="user-profile">
+        <div class="score-badge">
+            <i class="fa-solid fa-trophy score-badge__icon"></i>
+            <span class="score-badge__value" id="nav-total-score">1,250</span>
+        </div>
+        <span>Hello, User</span>
+        <div id="user-avatar">
+            <div class="avatar" id="PFP">U</div>
+            <i class="fa-light fa-greater-than greater" id="toggle-arrow"></i>
+        </div>
+    </div>
+
+
+    <div class="user--menu hidden" id="user-Menu">
+        <div class="user--header">
+            <div class="user--name">
+                User Name
+            </div>
+            <a class="user--edit" href="#">Edit Profile ></a>
+        </div>
+        <a class="user--menu__dashboard menus" href="#">
+            <svg fill="none" height="800px" viewBox="0 -0.5 25 25" width="800px"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd"
+                      d="M9.918 10.0005H7.082C6.66587 9.99708 6.26541 10.1591 5.96873 10.4509C5.67204 10.7427 5.50343 11.1404 5.5 11.5565V17.4455C5.5077 18.3117 6.21584 19.0078 7.082 19.0005H9.918C10.3341 19.004 10.7346 18.842 11.0313 18.5502C11.328 18.2584 11.4966 17.8607 11.5 17.4445V11.5565C11.4966 11.1404 11.328 10.7427 11.0313 10.4509C10.7346 10.1591 10.3341 9.99708 9.918 10.0005Z"
+                      fill-rule="evenodd"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                <path clip-rule="evenodd"
+                      d="M9.918 4.0006H7.082C6.23326 3.97706 5.52559 4.64492 5.5 5.4936V6.5076C5.52559 7.35629 6.23326 8.02415 7.082 8.0006H9.918C10.7667 8.02415 11.4744 7.35629 11.5 6.5076V5.4936C11.4744 4.64492 10.7667 3.97706 9.918 4.0006Z"
+                      fill-rule="evenodd"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                <path clip-rule="evenodd"
+                      d="M15.082 13.0007H17.917C18.3333 13.0044 18.734 12.8425 19.0309 12.5507C19.3278 12.2588 19.4966 11.861 19.5 11.4447V5.55666C19.4966 5.14054 19.328 4.74282 19.0313 4.45101C18.7346 4.1592 18.3341 3.9972 17.918 4.00066H15.082C14.6659 3.9972 14.2654 4.1592 13.9687 4.45101C13.672 4.74282 13.5034 5.14054 13.5 5.55666V11.4447C13.5034 11.8608 13.672 12.2585 13.9687 12.5503C14.2654 12.8421 14.6659 13.0041 15.082 13.0007Z"
+                      fill-rule="evenodd"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                <path clip-rule="evenodd"
+                      d="M15.082 19.0006H17.917C18.7661 19.0247 19.4744 18.3567 19.5 17.5076V16.4936C19.4744 15.6449 18.7667 14.9771 17.918 15.0006H15.082C14.2333 14.9771 13.5256 15.6449 13.5 16.4936V17.5066C13.525 18.3557 14.2329 19.0241 15.082 19.0006Z"
+                      fill-rule="evenodd"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+            </svg>
+            Dashboard
+            <!--            <a href="#">Dashboard</a>-->
+        </a>
+        <a class="user--menu__leaderboard menus">
+            <svg fill="none" height="800px" viewBox="0 0 24 24" width="800px" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 21H9V12.6C9 12.2686 9.26863 12 9.6 12H14.4C14.7314 12 15 12.2686 15 12.6V21Z"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                <path d="M20.4 21H15V18.1C15 17.7686 15.2686 17.5 15.6 17.5H20.4C20.7314 17.5 21 17.7686 21 18.1V20.4C21 20.7314 20.7314 21 20.4 21Z"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                <path d="M9 21V16.1C9 15.7686 8.73137 15.5 8.4 15.5H3.6C3.26863 15.5 3 15.7686 3 16.1V20.4C3 20.7314 3.26863 21 3.6 21H9Z"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                <path d="M10.8056 5.11325L11.7147 3.1856C11.8314 2.93813 12.1686 2.93813 12.2853 3.1856L13.1944 5.11325L15.2275 5.42427C15.4884 5.46418 15.5923 5.79977 15.4035 5.99229L13.9326 7.4917L14.2797 9.60999C14.3243 9.88202 14.0515 10.0895 13.8181 9.96099L12 8.96031L10.1819 9.96099C9.94851 10.0895 9.67568 9.88202 9.72026 9.60999L10.0674 7.4917L8.59651 5.99229C8.40766 5.79977 8.51163 5.46418 8.77248 5.42427L10.8056 5.11325Z"
+                      stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+            </svg>
+            Leaderboard
+            <!--            <a href="#">Leaderboard</a>-->
+        </a>
+        <a class="user--menu__logout menus" href="#">
+            <svg class="jam jam-log-out" fill="none" height="800px" preserveAspectRatio="xMinYMin"
+                 viewBox="-5 -3 24 24"
+                 width="800px" xmlns="http://www.w3.org/2000/svg">
+                <path d='M3.414 7.828h5.642a1 1 0 1 1 0 2H3.414l1.122 1.122a1 1 0 1 1-1.415 1.414L.293 9.536a.997.997 0 0 1 0-1.415L3.12 5.293a1 1 0 0 1 1.415 1.414L3.414 7.828zM13 0a1 1 0 0 1 1 1v16a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z'
+                      stroke="#000000"/>
+            </svg>
+            Logout
+            <!--            <a href="./src/Pages/login.html">Logout</a>-->
+        </a>
+    </div>
+    <button class=" btn user-login hidden">Login</button>
+</nav>
+
+<header class="hero">
+    <div class="hero-container">
+
+        <div class="hero-text">
+            <h1>Master Your Tech Skills</h1>
+            <p>Challenge yourself with our curated quizzes. Level up your programming knowledge today.</p>
+            <a class="cta-btn" href="#selection-area">Start Playing Now</a>
+        </div>
+
+        <div class="hero-visual">
+            <div class="visual-box">
+                <i class="fa-solid fa-laptop-code main-icon"></i>
+
+                <div class="floating-card card-top">
+                    <i class="fa-solid fa-check-circle icon-success"></i>
+                    <span>100% Score</span>
+                </div>
+
+                <div class="floating-card card-bottom">
+                    <i class="fa-brands fa-js icon-js"></i>
+                    <span>JS Master</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<script>
+    const avatar = document.getElementById('user-avatar')
+    const userMenu = document.getElementById('user-Menu')
+    const greater = document.getElementById('toggle-arrow')
+
+    function handleOpenUserMenu(e) {
+        e.stopPropagation();
+        userMenu.classList.toggle('hidden')
+        userMenu.classList.toggle('show')
+        greater.classList.toggle('arrowDown')
+        document.addEventListener('click', handleCloseUserMenu);
+    }
+
+    function handleCloseUserMenu(e) {
+        if (!e.target.closest('#user-Menu')) {
+            userMenu.classList.add('hidden')
+            userMenu.classList.remove('show')
+            greater.classList.remove('arrowDown')
+        }
+
+        document.removeEventListener('click', handleCloseUserMenu)
+    }
+
+    avatar.addEventListener('click', handleOpenUserMenu)
+
+</script>
+</body>
+</html>
