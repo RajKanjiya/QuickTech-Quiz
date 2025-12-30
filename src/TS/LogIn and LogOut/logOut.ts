@@ -1,4 +1,4 @@
-import {supabase} from "../supabase/SupabaseClint.ts";
+import {supabase} from "../../supabase/SupabaseClint.ts";
 
 
 const logOutBtn = document.getElementById('logOutBtn') as HTMLButtonElement | null
@@ -15,5 +15,5 @@ logOutBtn?.addEventListener('click', async () => {
 
     alert('Log Out')
 
-    window.location.href = '../Pages/login.html'
+    window.location.href = '../../Pages/login.html'
 })

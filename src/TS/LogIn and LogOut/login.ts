@@ -1,4 +1,4 @@
-import {supabase} from "../supabase/SupabaseClint.ts";
+import {supabase} from "../../supabase/SupabaseClint.ts";
 
 // window.location.href = 'Login'
 

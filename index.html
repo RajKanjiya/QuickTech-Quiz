@@ -58,7 +58,7 @@
             Dashboard
             <!--            <a href="#">Dashboard</a>-->
         </a>
-        <a class="user--menu__leaderboard menus">
+        <a class="user--menu__leaderboard menus" href="##">
             <svg fill="none" height="800px" viewBox="0 0 24 24" width="800px" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15 21H9V12.6C9 12.2686 9.26863 12 9.6 12H14.4C14.7314 12 15 12.2686 15 12.6V21Z"
                       stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
@@ -70,9 +70,8 @@
                       stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
             </svg>
             Leaderboard
-            <!--            <a href="#">Leaderboard</a>-->
         </a>
-        <a class="user--menu__logout menus" href="#">
+        <a class="user--menu__logout menus" href="./src/Pages/login.html">
             <svg class="jam jam-log-out" fill="none" height="800px" preserveAspectRatio="xMinYMin"
                  viewBox="-5 -3 24 24"
                  width="800px" xmlns="http://www.w3.org/2000/svg">
@@ -80,10 +79,9 @@
                       stroke="#000000"/>
             </svg>
             Logout
-            <!--            <a href="./src/Pages/login.html">Logout</a>-->
         </a>
     </div>
-    <button class=" btn user-login hidden">Login</button>
+    <!--    <button class=" btn user-login hidden">Login</button>-->
 </nav>
 
 <header class="hero">
@@ -114,31 +112,6 @@
     </div>
 </header>
 
-<script>
-    const avatar = document.getElementById('user-avatar')
-    const userMenu = document.getElementById('user-Menu')
-    const greater = document.getElementById('toggle-arrow')
-
-    function handleOpenUserMenu(e) {
-        e.stopPropagation();
-        userMenu.classList.toggle('hidden')
-        userMenu.classList.toggle('show')
-        greater.classList.toggle('arrowDown')
-        document.addEventListener('click', handleCloseUserMenu);
-    }
-
-    function handleCloseUserMenu(e) {
-        if (!e.target.closest('#user-Menu')) {
-            userMenu.classList.add('hidden')
-            userMenu.classList.remove('show')
-            greater.classList.remove('arrowDown')
-        }
-
-        document.removeEventListener('click', handleCloseUserMenu)
-    }
-
-    avatar.addEventListener('click', handleOpenUserMenu)
-
-</script>
+<script src="src/TS/index.ts" type="module"></script>
 </body>
 </html>
