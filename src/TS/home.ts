@@ -6,6 +6,7 @@ import {supabase} from "../supabase/SupabaseClint.ts";
     const {data: {user}} = await supabase.auth.getUser();
 
     if (!user) {
+        // @ts-ignore
         window.location.href = '/Pages/login.html'
     }
 })()
@@ -18,7 +19,7 @@ interface UserDetails {
 
 //get detail of the user
 const {username, avatar_url, total_points} = await getUserDetails() as UserDetails
-console.log(username, avatar_url, total_points)
+// console.log(username, avatar_url, total_points)
 
 
 const avatar = document.getElementById('user-avatar') as HTMLDivElement

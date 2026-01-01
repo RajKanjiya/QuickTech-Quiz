@@ -3,6 +3,7 @@ import {supabase} from "../../supabase/SupabaseClint.ts";
 
 const logOutBtn = document.getElementById('logOutBtn') as HTMLButtonElement | null
 // const logOutBtn = document.querySelector<HTMLButtonElement>('#logOutBtn');
+console.log('slafj')
 
 
 logOutBtn?.addEventListener('click', async () => {
@@ -13,7 +14,7 @@ logOutBtn?.addEventListener('click', async () => {
         alert('Not successful')
     }
 
-    alert('Log Out')
+    // alert('Log Out')
 
-    window.location.href = '../../Pages/login.html'
+    window.location.href = '/Pages/login.html'
 })

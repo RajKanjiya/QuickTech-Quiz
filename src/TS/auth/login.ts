@@ -71,7 +71,10 @@ async function handleSignUp(e: any) {
     }
 
     alert('Account created!')
-    window.location.replace("../../index.html")
+    const currentLocation: string = window.location.origin
+
+    // @ts-ignore
+    window.location.href = `${currentLocation}/index.html`
 
 }
 
@@ -99,6 +102,10 @@ async function handleLogin(e: Event) {
     }
 
     alert('login successfully!')
-    window.location.replace("../../index.html")
+    const currentLocation: string = window.location.origin
+
+    // @ts-ignore
+    window.location.href = `${currentLocation}/index.html`
+
 }
 
