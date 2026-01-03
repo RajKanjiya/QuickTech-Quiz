@@ -1,20 +1,18 @@
 import {supabase} from "../../supabase/SupabaseClint.ts";
 
-
 const logOutBtn = document.getElementById('logOutBtn') as HTMLButtonElement | null
-// const logOutBtn = document.querySelector<HTMLButtonElement>('#logOutBtn');
-console.log('slafj')
-
 
 logOutBtn?.addEventListener('click', async () => {
 
+    //sigh out function from supabase
     let {error} = await supabase.auth.signOut()
 
+    //if any error in log our show this to user
     if (error) {
-        alert('Not successful')
+        alert('Error happen in logout')
+        return
     }
 
-    // alert('Log Out')
-
+    //logout successfully the set user to login page
     window.location.href = '/Pages/login.html'
 })

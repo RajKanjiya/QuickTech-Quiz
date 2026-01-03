@@ -27,19 +27,19 @@
             <div class="forms">
 
                 <form class="loginForm active" method="post" name="loginForm">
-                    <input id="loginEmail" name="loginEmail" placeholder="Email" type="text">
-                    <input id="loginPass" name="loginPass" placeholder="Password" type="password">
+                    <input id="loginEmail" name="loginEmail" placeholder="Email" required type="text">
+                    <input id="loginPass" name="loginPass" placeholder="Password" required type="password">
                     <a class="forgotPass" href="">
                         Forgot Password?
                     </a>
-                    <span class="errorSpan hidden" id="loginError">invalid Email or Password</span>
+                    <span class="errorSpan hidden" id="loginError">Invalid Email or Password</span>
                     <button class="loginBtn" type="submit">Login</button>
                 </form>
 
                 <form class="signUpForm" name="signUpForm">
-                    <input id="signupUsername" name="" placeholder="User Name" type="text">
-                    <input id="signupEmail" name="" placeholder="Email" type="text">
-                    <input id="signupPass" name="" placeholder="Password" type="password">
+                    <input id="signupUsername" name="" placeholder="User Name" required type="text">
+                    <input id="signupEmail" name="" placeholder="Email" required type="text">
+                    <input id="signupPass" name="" placeholder="Password" required type="password">
                     <span class="errorSpan hidden" id="signUpError">Please enter valid Email and Password</span>
                     <button class="signUpBtn" type="submit">Sign Up</button>
                 </form>

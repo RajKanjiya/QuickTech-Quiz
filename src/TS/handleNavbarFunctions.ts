@@ -1,44 +1,49 @@
 import getUserDetails from "./functions/getUserData.ts";
-import {supabase} from "../supabase/SupabaseClint.ts";
-
-//function to check user is auth or not
-(async function () {
-    const {data: {user}} = await supabase.auth.getUser();
-
-    if (!user) {
-        // @ts-ignore
-        window.location.href = '/Pages/login.html'
-    }
-})()
-
-interface UserDetails {
-    username: string;
-    avatar_url: string;
-    total_points: number;
-}
-
-//get detail of the user
-const {username, avatar_url, total_points} = await getUserDetails() as UserDetails
-// console.log(username, avatar_url, total_points)
-
 
 const avatar = document.getElementById('user-avatar') as HTMLDivElement
 const userMenu = document.getElementById('user-Menu') as HTMLDivElement
 const greater = document.getElementById('toggle-arrow') as HTMLElement
 const userPFP = document.getElementById('PFP') as HTMLImageElement
 const userName = document.getElementById('nav-user-name') as HTMLSpanElement
+const userMenuName = document.getElementById('user-Menu-Name') as HTMLSpanElement
 const userScore = document.getElementById('nav-total-score') as HTMLSpanElement
 
-userPFP.src = avatar_url
-userName.textContent = `Hello , ${username}`
-userScore.textContent = `${total_points}`
+document.getElementById('logo')?.addEventListener('click', () => {
+    window.location.href = '/index.html'
+})
 
-//function to open user menu
+//interface for provide what getUserDetails() function return
+interface UserDetails {
+    avatar_url: string
+    username: string
+    total_points: number
+}
+
+//function to check user is auth or not
+(async function () {
+    //1. get user data
+    const data = await getUserDetails() as UserDetails
+
+    // 2. if user not found then send user to the login page
+    if (!data) {
+        window.location.href = '/Pages/login.html'
+        return
+    }
+
+    //3. set user PFP , name and points
+    userPFP.src = `${data.avatar_url}`
+    userName.textContent = `Hello , ${data.username}`
+    userMenuName.textContent = `${data.username}`
+    userScore.textContent = `${data.total_points}`
+})()
+
 function handleOpenUserMenu(e: Event) {
     //this prevents event from continuing to bubble (or capture) through the DOM after it is handled by the current element.
     e.stopPropagation();
+
+    //1. toggle class list of all of this
     userMenu.classList.toggle('hidden')
-    userMenu.classList.toggle('show')
+    userMenu.classList.toggle('slidInOut')
     greater.classList.toggle('arrowDown')
     document.addEventListener('click', handleCloseUserMenu);
 }
@@ -48,9 +53,10 @@ function handleOpenUserMenu(e: Event) {
 function handleCloseUserMenu(e: Event) {
     // @ts-ignore
     if (!e.target.closest('#user-Menu')) {
-        userMenu.classList.add('hidden')
-        userMenu.classList.remove('show')
+        //1. add hidden class list of all of this
+        userMenu.classList.remove('slidInOut')
         greater.classList.remove('arrowDown')
+        userMenu.classList.add('hidden')
     }
 
     document.removeEventListener('click', handleCloseUserMenu)

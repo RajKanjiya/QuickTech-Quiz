@@ -182,6 +182,22 @@
   //opacity: 0;
   //transform: translateX(-40px);
 
+  //transition: all .5s;
+  //opacity: 0;
+  //transform: translateY(-5rem);
+  //
+  //&.formIn {
+  //  opacity: 1;
+  //  transform: translateY(0);
+  //  display: flex;
+  //}
+  //
+  //&.formOut {
+  //  display: none;
+  //  opacity: 0;
+  //  transform: translateY(5rem);
+  //}
+
   //login form inputs
   input {
     margin-bottom: 1rem;
@@ -224,6 +240,23 @@
   display: none;
   flex-direction: column;
   gap: 2rem;
+  //transition: all .5s;
+
+  //transition: all .5s;
+  //opacity: 0;
+  //transform: translateY(-5rem);
+  //
+  //.formIn {
+  //  opacity: 1;
+  //  transform: translateY(0);
+  //  display: flex;
+  //}
+  //
+  //&.formOut {
+  //  display: none;
+  //  opacity: 0;
+  //  transform: translateY(5rem);
+  //}
 
   input {
     margin-bottom: .5rem;
@@ -244,32 +277,32 @@
   }
 }
 
-.leftToRightAnimation {
-  animation: leftToRight .5s;
-}
-
-@keyframes leftToRight {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-}
-
-.rightToLeftAnimation {
-  animation: rightToLeft .5s;
-}
-
-@keyframes rightToLeft {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-}
+//.leftToRightAnimation {
+//  animation: leftToRight .5s;
+//}
+//
+//@keyframes leftToRight {
+//  from {
+//    opacity: 0;
+//    transform: translateX(-50px);
+//  }
+//  to {
+//    opacity: 1;
+//    transform: translateX(0px);
+//  }
+//}
+//
+//.rightToLeftAnimation {
+//  animation: rightToLeft .5s;
+//}
+//
+//@keyframes rightToLeft {
+//  from {
+//    opacity: 1;
+//    transform: translateX(0);
+//  }
+//  to {
+//    opacity: 0;
+//    transform: translateX(50px);
+//  }
+//}

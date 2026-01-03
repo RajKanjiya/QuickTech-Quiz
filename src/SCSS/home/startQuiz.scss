@@ -210,80 +210,80 @@
   height: 6rem; /* 60px */
 }
 
-/* =========================================
-   5. MAIN LAYOUT & GRID
-   ========================================= */
-.gird__container {
-  max-width: 120rem; /* 1200px */
-  margin: 0 auto;
-  padding: 0 5% 5rem;
+///* =========================================
+//   5. MAIN LAYOUT & GRID
+//   ========================================= */
+//.grid__container {
+//  max-width: 120rem; /* 1200px */
+//  margin: 0 auto;
+//  padding: 0 5% 5rem;
+//
+//  .section-title {
+//    margin-bottom: 3rem; /* 30px */
+//    font-size: 2.4rem; /* 24px */
+//    color: var(--text-main);
+//    border-left: 0.5rem solid var(--primary-color); /* 5px border */
+//    padding-left: 1.5rem; /* 15px */
+//  }
+//}
+//
+//.grid {
+//  display: grid;
+//  grid-template-columns: repeat(3, minmax(25rem, 1fr)); /* min 250px */
+//  gap: 3rem; /* 30px */
+//}
 
-  .section-title {
-    margin-bottom: 3rem; /* 30px */
-    font-size: 2.4rem; /* 24px */
-    color: var(--text-main);
-    border-left: 0.5rem solid var(--primary-color); /* 5px border */
-    padding-left: 1.5rem; /* 15px */
-  }
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(25rem, 1fr)); /* min 250px */
-  gap: 3rem; /* 30px */
-}
-
-/* =========================================
-   6. SUBJECT CARD COMPONENT
-   ========================================= */
-.subject-card {
-  background: var(--surface-color);
-  border-radius: 2rem; /* 20px */
-  padding: 2.5rem; /* 25px */
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  border: 0.2rem solid transparent; /* 2px border */
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-  .icon-box {
-    width: 6rem; /* 60px */
-    height: 6rem; /* 60px */
-    background: var(--input-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem; /* 20px bottom margin */
-    font-size: 2.5rem; /* 25px icon size */
-    color: var(--primary-color);
-    transition: background 0.3s, color 0.3s;
-  }
-
-  h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.8rem; /* 18px */
-    color: var(--text-main);
-  }
-
-  /* HOVER STATE */
-  &:hover {
-    transform: translateY(-0.5rem); /* -5px */
-    box-shadow: var(--shadow-card);
-  }
-
-  /* SELECTED STATE */
-  &.selected {
-    border-color: var(--primary-color);
-    background: #eef6ff;
-    transform: scale(1.05);
-
-    .icon-box {
-      background: var(--bg-gradient);
-      color: white;
-      box-shadow: 0 0.4rem 1rem rgba(43, 139, 242, 0.4);
-    }
-  }
-}
+///* =========================================
+//   6. SUBJECT CARD COMPONENT
+//   ========================================= */
+//.subject-card {
+//  background: var(--surface-color);
+//  border-radius: 2rem; /* 20px */
+//  padding: 2.5rem; /* 25px */
+//  text-align: center;
+//  box-shadow: var(--shadow-sm);
+//  cursor: pointer;
+//  border: 0.2rem solid transparent; /* 2px border */
+//  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+//
+//  .icon-box {
+//    width: 6rem; /* 60px */
+//    height: 6rem; /* 60px */
+//    background: var(--input-bg);
+//    border-radius: 50%;
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    margin: 0 auto 2rem; /* 20px bottom margin */
+//    font-size: 2.5rem; /* 25px icon size */
+//    color: var(--primary-color);
+//    transition: background 0.3s, color 0.3s;
+//  }
+//
+//  h3 {
+//    margin-bottom: 0.5rem;
+//    font-size: 1.8rem; /* 18px */
+//    color: var(--text-main);
+//  }
+//
+//  /* HOVER STATE */
+//  &:hover {
+//    transform: translateY(-0.5rem); /* -5px */
+//    box-shadow: var(--shadow-card);
+//  }
+//
+//  /* SELECTED STATE */
+//  &.selected {
+//    border-color: var(--primary-color);
+//    background: #eef6ff;
+//    transform: scale(1.05);
+//
+//    .icon-box {
+//      background: var(--bg-gradient);
+//      color: white;
+//      box-shadow: 0 0.4rem 1rem rgba(43, 139, 242, 0.4);
+//    }
+//  }
+//}
 
 

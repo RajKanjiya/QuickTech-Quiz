@@ -31,6 +31,7 @@ $radius-full: 9999px;
   }
 
   .logo {
+    cursor: pointer;
     font-size: 2.4rem; /* 24px */
     font-weight: 600;
     color: var(--primary-color);
@@ -96,7 +97,12 @@ $radius-full: 9999px;
       bottom: -1px;
       right: 0;
       rotate: 90deg;
-      transition: all .5s;
+      transition: all .5s ease;
+
+      &.arrowDown {
+        rotate: 270deg;
+      }
+
     }
   }
 
@@ -120,7 +126,6 @@ $radius-full: 9999px;
 
   .user--menu {
     position: absolute;
-    //top: 74px;
     bottom: -223px;
     right: 1px;
     border: 1px solid rgba(51, 51, 51, 0.85);
@@ -131,6 +136,16 @@ $radius-full: 9999px;
     display: flex;
     flex-direction: column;
     font-size: 1.7rem;
+    transition: all .5s ease;
+
+    transform: translateY(-5rem);
+    opacity: 0;
+
+
+    &.slidInOut {
+      transform: translateY(0);
+      opacity: 1;
+    }
 
     .user--header {
       padding: 10px 20px;
@@ -206,41 +221,4 @@ $radius-full: 9999px;
       //}
     }
   }
-}
-
-
-//animation for use menu
-@keyframes dropDown {
-  from {
-    opacity: 0;
-    transform: translateY(-5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-//show class for use menu
-
-.user--menu.show {
-  animation: dropDown .5s;
-}
-
-
-//animation for toggle arrow near use profile
-@keyframes arrowDown {
-  from {
-    transform: rotate(90deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
-}
-
-//class to add for toggle-arrow
-
-.greater.arrowDown {
-  transform: rotate(180deg);
-  animation: arrowDown .5s;
 }

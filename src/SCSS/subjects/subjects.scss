@@ -1,0 +1,133 @@
+.grid-background {
+  width: 100svw;
+  height: 90svh;
+  //background-image: var(--bg-gradient);
+}
+
+.grid__container {
+  max-width: 120rem; /* 1200px */
+  margin: 0 auto;
+  padding: 10rem 5%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 3rem;
+}
+
+.section-title {
+  border-left: .5rem solid var(--primary-color);
+  padding-left: 1rem;
+  margin-bottom: 5rem;
+  font-size: 2rem;
+}
+
+.subject-card {
+  //height: 5rem;
+  background-color: var(--bg-white);
+  padding: 2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border-radius: 2rem;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  .icon-box {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background-color: var(--input-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, color 0.3s;
+
+    svg {
+      height: 4rem;
+      width: 4rem;
+      color: var(--primary-color);
+    }
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    color: var(--text-main);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  &.selected {
+    border: 2px solid var(--primary-color);
+    transform: scale(1.05);
+
+    .icon-box {
+      background-color: var(--primary-color);
+      box-shadow: 0 0.4rem 1rem rgba(43, 139, 242, 0.4);
+
+      svg {
+        color: var(--bg-white);
+      }
+    }
+  }
+
+}
+
+.continue-btn {
+  margin-top: 7rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-radius: 100px;
+    transition: all .3s;
+    opacity: .7;
+    pointer-events: none;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    &:active {
+      transform: translateY(-2px);
+    }
+
+  }
+
+  button {
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-radius: 100px;
+    //pointer-events: none;
+    transition: all .3s;
+    opacity: .5;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    &:active {
+      transform: translateY(-2px);
+    }
+
+  }
+
+}
