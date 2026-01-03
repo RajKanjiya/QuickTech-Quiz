@@ -3,6 +3,8 @@
 @use "root";
 @use 'login';
 @use "subjects/subjects";
+@use "difficulty/difficulty";
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
 
 .container {
   height: 100svh;
@@ -50,7 +52,11 @@ html {
   padding: 0;
   box-sizing: border-box;
   //font-family: 'Segoe UI', sans-serif;
-  font-family: 'Poppins', sans-serif;
+  //font-family: 'Poppins', sans-serif;
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
 }
 
 body {

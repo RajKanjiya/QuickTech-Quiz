@@ -52,7 +52,7 @@ subjectsContainer.addEventListener('click', (e) => {
     Object.assign(continueAnchor.style, {
         opacity: '1',
         cursor: 'pointer',
-        'pointer-events': 'auto'
+        'pointer-events': 'auto',
     })
 
     //3.7. remove disabled attribute from btn

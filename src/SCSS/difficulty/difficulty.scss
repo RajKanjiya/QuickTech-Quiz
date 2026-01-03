@@ -1,0 +1,128 @@
+.diff__container {
+  width: 100svw;
+  height: 90svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diff__container__inner {
+  width: 40%;
+  height: 70%;
+  background-color: var(--bg-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 3rem;
+}
+
+.diff__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+
+  .subject__detail {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .4rem;
+
+    .subject__name {
+      font-size: 3rem;
+    }
+
+    svg {
+      height: 6rem;
+      width: 6rem;
+      color: var(--primary-color);
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+  }
+}
+
+.diff__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  gap: 2rem;
+
+  .diff__card {
+    display: flex;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    //gap: 2rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid var(--border-light-gray);
+    transition: all .3s ease;
+
+    &__icon {
+      font-size: 3rem;
+      margin-right: 2rem;
+    }
+
+    &__text {
+
+      h3 {
+        font-size: 1.5rem;
+        transition: all .3s;
+      }
+
+      p {
+        color: var(--text-muted);
+      }
+    }
+
+    &__PTS {
+      font-size: 1.5rem;
+      margin-left: auto;
+    }
+
+    &--Easy {
+      &:hover {
+        transform: translateY(-2px);
+        //box-shadow: var(--shadow-green);
+        border: 2px solid var(--hover-green);
+
+        h3 {
+          color: var(--hover-green);
+        }
+      }
+    }
+
+    &--Medium {
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card);
+        border: 2px solid var(--hover-yello);
+
+        h3 {
+          color: var(--hover-yello);
+        }
+      }
+    }
+
+    &--Hard {
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card);
+        border: 2px solid var(--hover-red);
+
+        h3 {
+          color: var(--hover-red);
+        }
+      }
+    }
+
+  }
+}

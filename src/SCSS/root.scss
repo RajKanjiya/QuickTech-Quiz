@@ -16,7 +16,9 @@
   --primary-color: #2b8bf2;
   --primary-hover: #1f6dc4;
   --accent-color: #00f2fe;
+
   --bordre-white: #ffff;
+  --border-light-gray: #e2e8f0;
 
 
   /* Backgrounds */
@@ -34,4 +36,11 @@
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-card: 0 10px 20px rgba(0, 0, 0, 0.08);
 
+
+  //hover
+  --hover-green: #19c512;
+  --shadow-green: 0 2px 6px #19c512;
+  --hover-red: rgba(255, 44, 44, 0.86);
+  --shadow-orange: 0 2px 6px #f1845e;
+  --hover-yello: #f8a04c;
 }
