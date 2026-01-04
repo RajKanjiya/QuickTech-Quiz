@@ -40,7 +40,6 @@ subjectsContainer.addEventListener('click', (e) => {
     // @ts-ignore
     const target = e.target.closest('.subject-card')
     target.classList.add('selected')
-    // console.log(target)
 
     //3.4. add selected subject id to the url that we created before
     url.searchParams.set('sid', `${target.id}`)
@@ -60,18 +59,19 @@ subjectsContainer.addEventListener('click', (e) => {
 })
 
 
-// event listener for continue btn
+//4. wait for click on continue btn and then go to next page
 continueAnchor.addEventListener('click', (e) => {
     e.preventDefault()
+    //4.1. get the current parameter from the url
     const currentParam = window.location.search || null
 
-
+    //4.2 if there was a parameter the add to the next page
     if (currentParam) {
+        //4.3 get the next page url and then add the current parameter
         const destinationUrl = continueAnchor.getAttribute('href') + currentParam
         // console.log(destinationUrl)
-        window.location.href = destinationUrl
-    } else {
-        window.location.href = '/Pages/difficulty.html'
-    }
 
+        //4.4 then go to the url
+        window.location.href = destinationUrl
+    }
 })

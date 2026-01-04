@@ -8,13 +8,35 @@
 
 .diff__container__inner {
   width: 40%;
-  height: 70%;
+  min-height: 65%;
+  //height: max-content;
   background-color: var(--bg-white);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  //justify-content: center;
+  padding: 4rem 2rem;
   gap: 3rem;
+
+  @media screen and (max-width: 1440px) {
+    height: max-content;
+  }
+
+  @media screen and (max-width: 1024px) {
+    height: max-content;
+    width: 50%;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 80%;
+    width: 70%;
+  }
+
+  @media screen and (max-width: 450px) {
+    height: 100%;
+    width: 100%;
+    padding: 7rem 0.8rem;
+  }
 }
 
 .diff__header {
@@ -56,6 +78,10 @@
   width: 80%;
   gap: 2rem;
 
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
+
   .diff__card {
     display: flex;
     padding: 1rem 1.5rem;
@@ -65,6 +91,13 @@
     border-radius: 5px;
     border: 2px solid var(--border-light-gray);
     transition: all .3s ease;
+    cursor: pointer;
+
+    @media screen and (max-width: 450px) {
+      height: 100%;
+      width: 100%;
+      //padding: 1rem 1rem;
+    }
 
     &__icon {
       font-size: 3rem;
@@ -81,11 +114,30 @@
       p {
         color: var(--text-muted);
       }
+
+      @media screen and (max-width: 320px) {
+        width: 70%;
+      }
     }
 
     &__PTS {
+      //display: flex;
+      //align-items: flex-end;
+      //justify-content: flex-end;
       font-size: 1.5rem;
       margin-left: auto;
+      width: max-content;
+
+      @media screen and (max-width: 450px) {
+        text-align: right;
+      }
+
+      @media screen and (max-width: 320px) {
+        text-align: right;
+        margin-left: auto;
+        //width: min-content;
+      }
+
     }
 
     &--Easy {
