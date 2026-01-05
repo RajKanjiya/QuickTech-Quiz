@@ -10,7 +10,7 @@ export default async function handleUploadQuizResult(subjectId: string | null, d
 
     const {data: {user}} = await supabase.auth.getUser();
 
-    const {data, error} = await supabase
+    const {error} = await supabase
         .rpc('submit_quiz_attempt', {
             p_user_id: user?.id, // Get this from supabase.auth.getUser()
             p_subject_id: subjectId,
@@ -22,6 +22,6 @@ export default async function handleUploadQuizResult(subjectId: string | null, d
         })
 
     if (error) console.error(error)
-    else console.log("Attempt saved! Attempt ID:", data)
+    // else console.log("Attempt saved! Attempt ID:", data)
 
 }
