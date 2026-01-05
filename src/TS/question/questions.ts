@@ -18,7 +18,7 @@ const did = url.searchParams.get('did')
 
 //1. get question from the supabase
 const questions = await getQuestions()
-console.log(questions)
+// console.log(questions)
 
 let totalTimerId = setInterval(() => {
     totalTakenSecond++

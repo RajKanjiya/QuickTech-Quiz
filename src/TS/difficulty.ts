@@ -55,7 +55,7 @@ cards__container.addEventListener('click', (e) => {
     if (currentParam) {
         //4.4 get the next page url and then add the current parameter
         const destinationUrl = '/Pages/questions.html' + currentParam
-        console.log(destinationUrl)
+        // console.log(destinationUrl)
 
         //4.5 then go to the url
         window.location.href = destinationUrl

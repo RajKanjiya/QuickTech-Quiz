@@ -19,7 +19,7 @@ export default async function getQuestions() {
         return
     }
 
-    console.log(data)
+    // console.log(data)
 
     return data;
 }
