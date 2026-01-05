@@ -8,7 +8,8 @@
 
 .diff__container__inner {
   width: 40%;
-  min-height: 65%;
+  min-height: min-content;
+  max-height: max-content;
   //height: max-content;
   background-color: var(--bg-white);
   display: flex;

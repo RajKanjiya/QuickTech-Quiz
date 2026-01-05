@@ -6,6 +6,8 @@ const subjectDetails = document.getElementById('subject__details') as HTMLDivEle
 
 //1. get difficulty data from supabase and return array of object
 const difficulties = await getDifficulties() || {}
+// console.log(difficulties)
+
 
 //2. set the subject name and logo
 subjectDetails.innerHTML = `    

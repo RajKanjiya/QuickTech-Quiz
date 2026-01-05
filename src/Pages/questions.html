@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>QuickTech-Quiz</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/SCSS/style.scss" rel="stylesheet">
 </head>
 <body>
-asdf
+
+<div class="container">
+    <div class="question__container">
+        <div class="question__header">
+            <div class="pill" id="question-no">Question: 1 / 30</div>
+            <div class="timer">
+                ⌛
+                <span class="seconds" id="time">10</span>
+                s
+            </div>
+        </div>
+        <div class="question__body" id="question__body__id">
+
+            <div class="question__text" id="question-text">
+                Dou You Know The java Script?
+            </div>
+
+            <ul class="question__options" id="options-ul">
+                <!--            <li>Yes</li>-->
+                <!--            <li>No</li>-->
+                <!--            <li>Little bit</li>-->
+                <!--            <li>I started now</li>-->
+            </ul>
+
+        </div>
+        <button class="question__next__btn btn" id="btn-next">Next</button>
+    </div>
+</div>
+
+
+<script src="/TS/question/questions.ts" type="module"></script>
 </body>
 </html>
