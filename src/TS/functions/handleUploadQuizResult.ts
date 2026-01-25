@@ -21,7 +21,10 @@ export default async function handleUploadQuizResult(subjectId: string | null, d
             p_time_taken_seconds: timeTaken
         })
 
-    if (error) console.error(error)
+    if (error) {
+        alert('Error happen while submitting')
+        console.error(error)
+    }
     // else console.log("Attempt saved! Attempt ID:", data)
 
 }
