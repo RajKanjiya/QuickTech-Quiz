@@ -4,7 +4,6 @@ export default async function getQuestions() {
     const url = new URL(window.location.href)
     const sid = url.searchParams.get('sid')
     const did = url.searchParams.get('did')
-    console.log(did, sid)
 
 
     const {data, error} = await supabase

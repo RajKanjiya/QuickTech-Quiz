@@ -4,11 +4,12 @@ import handleUploadQuizResult from "../functions/handleUploadQuizResult.ts";
 const timer = document.getElementById('time') as HTMLSpanElement
 const options = document.getElementsByTagName('li')
 const nextBtn = document.getElementById('btn-next') as HTMLButtonElement
+const previousBtn = document.getElementById('btn-previous') as HTMLButtonElement
 const questionNoHTML = document.getElementById('question-no') as HTMLDivElement
-const quesitionText = document.getElementById('question-text') as HTMLDivElement
+const questionText = document.getElementById('question-text') as HTMLDivElement
 const optionUl = document.getElementById('options-ul') as HTMLUListElement
 let intervalID: number;
-let questionNo: number = 1;
+let questionNo: number = 28;
 let correctAnswers: number = 0
 let totalTakenSecond: number = 0
 
@@ -18,21 +19,24 @@ const did = url.searchParams.get('did')
 
 //1. get question from the supabase
 const questions = await getQuestions()
-// console.log(questions)
+
+const selectedAnswers = Array.from({length: questions.length - 1}).fill(-1)
 
 let totalTimerId = setInterval(() => {
     totalTakenSecond++
 }, 1000)
 
-let timerForQuestion = questions[0].time_limit_seconds
-// let timerForQuestion = '05'
+let timerForQuestion = Number(questions[0].time_limit_seconds) * questions.length
+// let timerForQuestion = 10;
 
 
-//2. initial call for display first question
+//2. initial call for display first question and start timer
 generateQuestion()
+startInterval()
 
 //3. check for click event
-nextBtn.addEventListener('click', handleNextQuestion)
+nextBtn.addEventListener('click', handleNextBtn)
+previousBtn.addEventListener('click', handlePreviousBtn)
 optionUl.addEventListener('click', handleNextQuestion)
 
 ////////////////////////////
@@ -45,19 +49,21 @@ function generateQuestion() {
     questionNoHTML.textContent = `Question: ${questionNo} / ${questions.length}`
 
     //2. display question
-    quesitionText.textContent = `${questions[questionNo - 1].question_text}`
+    questionText.textContent = `${questions[questionNo - 1].question_text}`
 
 
     //3 display options
     questions[questionNo - 1].options.map((opt: any) => {
-        // console.log(opt)
-        optionUl.innerHTML += `
+        if (selectedAnswers[questionNo - 1] == opt.option_text) {
+            optionUl.innerHTML += `
+            <li class="option__text active">${opt.option_text}</li>
+        `
+        } else {
+            optionUl.innerHTML += `
         <li class="option__text">${opt.option_text}</li>
     `
+        }
     })
-
-    //2.4. start timer
-    startInterval()
 }
 
 // handle for next question and restart the interval
@@ -67,44 +73,29 @@ function handleNextQuestion(e: any) {
         return;
     }
 
-    //if the question is last then change the text of next btn
-    if (questionNo == questions.length - 1) {
-        nextBtn.innerHTML = 'Finish'
+    for (let options of optionUl.children) {
+        options.classList.remove('active')
     }
 
-    //then last do all of this
-    questionNo++;
-    setElementsToInitialValue()
-    clearInterval(intervalID)
-    handleSelectedAnswer(e)
-}
+    e.target.classList.add('active')
 
-//check selected ans if right or not
-function handleSelectedAnswer(e: any) {
-    // if question is last then show the final screed
-    if (questionNo > questions.length) {
-        questionNoHTML.textContent = `Completed`
-        timer.textContent = '00'
-        handleFinishScreen()
-        return
-    }
-    // console.log(questions[questionNo - 2].correct_option_text, e.target.textContent)
-
-    //if any one option is selected and the selected is right then increase correctAnswers count
-    if ((!(e.target.textContent == 'Next') || !(e.target.textContent == 'Finish')) && (questions[questionNo - 2].correct_option_text == e.target.textContent)) {
-        correctAnswers++
-    }
-
-    //last generate the next question
-    generateQuestion()
+    selectedAnswers[questionNo - 1] = e.target.textContent
 }
 
 function handleFinishScreen() {
-    // console.log(correctAnswers)
 
+    for (let i = 0; i < questions.length; i++) {
+        if (selectedAnswers[i] != -1 && selectedAnswers[i] == questions[i].correct_option_text) {
+            correctAnswers++
+        }
+    }
+
+    timer.textContent = '00:00'
+    clearInterval(intervalID)
     clearInterval(totalTimerId)
-    quesitionText.textContent = ''
+    questionText.textContent = ''
     nextBtn.classList.add('hidden')
+    previousBtn.classList.add('hidden')
     // @ts-ignore
     document.getElementById('question__body__id').innerHTML = `
     <div class="finalBox" id="finish">
@@ -118,35 +109,64 @@ function handleFinishScreen() {
     handleUploadQuizResult(sid, did, (Number(correctAnswers) * Number(questions[0].points_per_question)), correctAnswers, questions.length, totalTakenSecond)
 }
 
-//set initial value for all that we change
-function setElementsToInitialValue() {
-    optionUl.innerHTML = ''
-    timer.textContent = timerForQuestion
+function handleNextBtn() {
+    if (questionNo > questions.length - 1) {
+        if (!confirm('Do you want to submit test')) {
+            return;
+        }
+        questionNoHTML.textContent = `Completed`
+        timer.textContent = '00'
+        handleFinishScreen()
+    }
 
+    if (questionNo < questions.length) {
+        questionNo++
+        optionUl.innerHTML = ''
+        generateQuestion()
+    }
 
-    Object.assign(nextBtn.style, {
-        opacity: '.8',
-        cursor: 'not-allowed',
-        'pointer-events': 'none',
-    })
+    if (questionNo == questions.length) {
+        nextBtn.innerHTML = 'Finish'
+    } else {
+        nextBtn.innerHTML = 'Next'
+    }
+
+}
+
+function handlePreviousBtn() {
+    if (questionNo > 1) {
+        questionNo--
+        optionUl.innerHTML = ''
+        generateQuestion()
+    }
+
+    if (questionNo == questions.length) {
+        nextBtn.innerHTML = 'Finish'
+    } else {
+        nextBtn.innerHTML = 'Next'
+    }
 }
 
 //set timer
 function startInterval() {
-    // initial time come from the supabase
-    timer.textContent = timerForQuestion
+    handleTimer()
     intervalID = setInterval(handleTimer, 1000)
 }
 
 // decrease time by 1 in html
 function handleTimer() {
+    timer.textContent = timerForQuestion.toString()
+    timerForQuestion--
+    const minutes = Math.floor(timerForQuestion / 60)
+    const seconds = Math.floor(timerForQuestion % 60)
     if (Number(timer.textContent) <= 0) {
-        timer.textContent = '00'
+        timer.textContent = '00:00'
         clearInterval(intervalID)
-
         disableOptions()
+        alert("Your time is over")
+        handleFinishScreen()
     } else {
-        timer.textContent = `${Number(timer.textContent) - 1}`.padStart(2, '0');
+        timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 }
 
@@ -155,10 +175,4 @@ function disableOptions() {
     for (let li of options) {
         li.classList.add('li-disabled')
     }
-
-    Object.assign(nextBtn.style, {
-        opacity: '1',
-        cursor: 'pointer',
-        'pointer-events': 'auto',
-    })
 }
