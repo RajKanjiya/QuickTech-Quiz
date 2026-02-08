@@ -19,22 +19,26 @@ const did = url.searchParams.get('did')
 
 //1. get question from the supabase
 const questions = await getQuestions()
+// console.log(questions)
 
-const selectedAnswers = Array.from({length: questions.length - 1}).fill(-1)
+//2. create array to store whether the answer is selected or not
+const selectedAnswers = Array.from({length: questions.length}).fill(-1)
 
+//3. start timer to calculate total taken time for this quiz
 let totalTimerId = setInterval(() => {
     totalTakenSecond++
 }, 1000)
 
+//4. set time of whole quiz
 let timerForQuestion = Number(questions[0].time_limit_seconds) * questions.length
 // let timerForQuestion = 10;
 
 
-//2. initial call for display first question and start timer
+//5. initial call for display first question and start timer
 generateQuestion()
 startInterval()
 
-//3. check for click event
+//6. check for click event
 nextBtn.addEventListener('click', handleNextBtn)
 previousBtn.addEventListener('click', handlePreviousBtn)
 optionUl.addEventListener('click', handleSelectedQuestion)
@@ -43,7 +47,7 @@ optionUl.addEventListener('click', handleSelectedQuestion)
 /////////////////////////////
 //Functions
 
-// function to generate question
+//1. function to generate question
 function generateQuestion() {
     //1. change the question number
     questionNoHTML.textContent = `Question: ${questionNo} / ${questions.length}`
@@ -54,46 +58,88 @@ function generateQuestion() {
 
     //3 display options
     questions[questionNo - 1].options.map((opt: any) => {
-        if (selectedAnswers[questionNo - 1] == opt.option_text) {
+        //3.1 if option is not selected then display all without any classes
+        if (selectedAnswers[questionNo - 1] === -1) {
             optionUl.innerHTML += `
-            <li class="option__text active">${opt.option_text}</li>
-        `
-        } else {
-            optionUl.innerHTML += `
-        <li class="option__text">${opt.option_text}</li>
-    `
+            <li class="option__text">${opt.option_text}</li>
+            `
+        }
+        //3.2 else display question like this
+        else {
+            //3.2.1 if this is correct answer then add correct class to it
+            if (opt.option_text === questions[questionNo - 1].correct_option_text) {
+                optionUl.innerHTML += `
+                <li class="option__text correct">${opt.option_text}</li>
+                `
+            }
+            //3.2.2 if the selected ans is wrong then add wrong class
+            else if (selectedAnswers[questionNo - 1] === opt.option_text) {
+                optionUl.innerHTML += `
+                    <li class="option__text wrong">${opt.option_text}</li>
+                `
+            } else {
+                optionUl.innerHTML += `
+                    <li class="option__text">${opt.option_text}</li>
+                `
+            }
+            disableOptions()
         }
     })
 }
 
-// handle for next question and restart the interval
+//2. handle for next question and restart the interval
 function handleSelectedQuestion(e: any) {
-    // return if the target is not option li or not next btn
+    //1. return if the target is not option li or not next btn
     if (e.target.classList.contains('question__options') && !(e.target.textContent == 'Next' || e.target.textContent == 'Finish')) {
         return;
     }
 
-    for (let options of optionUl.children) {
-        options.classList.remove('active')
+    //2. if selected answer is correct then add correct class
+    if (e.target.textContent === questions[questionNo - 1].correct_option_text) {
+        e.target.classList.add('correct')
+    }
+    //3. if wrong then do this
+    else {
+        //3.1 get all list from the document
+        let lis = document.getElementsByTagName('li') as HTMLCollection
+
+        //3.2 loop over the all lists and add correct class to the correct answer
+        for (const li of lis) {
+            if (li.innerHTML === questions[questionNo - 1].correct_option_text) {
+                li.classList.add('correct')
+                break;
+            }
+        }
+        //3.3 then add wrong class to selected one
+        e.target.classList.add('wrong')
     }
 
-    e.target.classList.add('active')
+    //4. disable all the options
+    disableOptions()
 
+    //5. update selectedAnswers to selected one
     selectedAnswers[questionNo - 1] = e.target.textContent
 }
 
+
+//3. this function handle finish screen or score screen
 function handleFinishScreen() {
+    //1. check all selected answers and increase correctAnswers by 1
     for (let i = 0; i < questions.length; i++) {
         if (selectedAnswers[i] == questions[i].correct_option_text) {
             correctAnswers++
         }
     }
 
-
+    //2. change the timer and question no text
     questionNoHTML.textContent = `Completed`
     timer.textContent = '00:00'
+
+    //3. clear both timer
     clearInterval(intervalID)
     clearInterval(totalTimerId)
+
+    //4. clear the question and next and previous btns
     questionText.textContent = ''
     nextBtn.classList.add('hidden')
     previousBtn.classList.add('hidden')
@@ -106,13 +152,16 @@ function handleFinishScreen() {
             <a class="" href="src/index.html">Home</a>
         </div>`
 
-
+    //5. upload the result data to DB
     handleUploadQuizResult(sid, did, (Number(correctAnswers) * Number(questions[0].points_per_question)), correctAnswers, questions.length, totalTakenSecond)
 }
 
+//4. this function handle next btn
 function handleNextBtn() {
+    //1. check is question is last or not
     if (questionNo > questions.length - 1) {
         for (let i = 0; i < questions.length; i++) {
+            //1.1 if user miss any question then first show pop up and go to that question
             if (selectedAnswers[i] === -1 && timerForQuestion != 0) {
                 questionNo = i + 1;
                 optionUl.innerHTML = ''
@@ -127,10 +176,12 @@ function handleNextBtn() {
             }
         }
 
+        //1.2 if user is on last question then do this
         if (!confirm('Do you want to submit test')) {
             return;
         }
 
+        //1.3 then display the result
         handleFinishScreen()
     }
 
@@ -148,6 +199,7 @@ function handleNextBtn() {
 
 }
 
+//5. this function handle previous btn
 function handlePreviousBtn() {
     if (questionNo > 1) {
         questionNo--

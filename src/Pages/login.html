@@ -37,9 +37,14 @@
                 </form>
 
                 <form class="signUpForm" name="signUpForm">
-                    <input id="signupUsername" name="" placeholder="User Name" required type="text">
-                    <input id="signupEmail" name="" placeholder="Email" required type="text">
-                    <input id="signupPass" name="" placeholder="Password" required type="password">
+                    <div id="fullName">
+                        <input id="signupFname" placeholder="First Name" required type="text">
+                        <input id="signupLname" placeholder="Last Name" required type="text">
+                    </div>
+                    <input id="signupUsername" placeholder="User Name" required type="text">
+                    <input id="signupEmail" placeholder="Email" required type="text">
+                    <input id="signupPass" placeholder="Password" required type="password">
+                    <input id="signupConPass" placeholder="Confirm Password" required type="password">
                     <span class="errorSpan hidden" id="signUpError">Please enter valid Email and Password</span>
                     <button class="signUpBtn" type="submit">Sign Up</button>
                 </form>

@@ -6,7 +6,7 @@
   //background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 
   height: 100svh;
-  width: 100svw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,11 @@
   align-items: center;
   background-color: rgba(79, 172, 254, 0.15); /* Low opacity blue */
 
+  @media screen and (max-width: 450px) {
+    height: 6rem;
+    width: 31rem;
+  }
+
   //this is for login and sign btns
   .form__btn {
     border: none;
@@ -33,6 +38,10 @@
     background-color: transparent;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+
+    @media screen and (max-width: 450px) {
+      width: 14rem;
+    }
 
     //this is for login and sign btn on focus no outline
     &:focus {
@@ -60,8 +69,8 @@
 
 //this is for whole login tab container
 .login__box {
-  max-height: 70%;
-  width: 35%;
+  max-height: 90%;
+  width: 40%;
   background: rgba(255, 255, 255, 0.85); /* 85% opacity */
   backdrop-filter: blur(10px); /* The "Frosted" blur effect */
   border: 1px solid var(--border-light-gray); /* Subtle border */
@@ -75,12 +84,12 @@
     width: 40%;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1024px) {
     width: 50%;
   }
 
-  @media screen and (max-width: 750px) {
-    width: 60%;
+  @media screen and (max-width: 768px) {
+    width: 80%;
   }
 
   @media screen and (max-width: 600px) {
@@ -107,6 +116,12 @@
     align-items: center;
     //justify-content: space-between;
     padding: 3rem;
+
+    @media screen and (max-width: 450px) {
+      width: 100%;
+      padding: 1rem .5rem;
+    }
+
   }
 }
 
@@ -223,6 +238,18 @@
   flex-direction: column;
   gap: 2rem;
   //transition: all .5s;
+
+  #fullName {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    input {
+      width: 100%;
+      margin-bottom: .5rem;
+    }
+  }
 
   input {
     margin-bottom: .5rem;

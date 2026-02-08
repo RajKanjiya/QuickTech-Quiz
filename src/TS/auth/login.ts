@@ -7,7 +7,7 @@ const signUpFrm = document.querySelector('form[name="signUpForm"]')
 
 //Event listener for click event on login btn at the top of login page
 loginBtn?.addEventListener('click', function (): void {
-    //add active class to login btn and login form
+    //add active class to log in btn and login form
     loginBtn.classList.add('btn--active')
     loginFrm?.classList.add('active')
 
@@ -87,12 +87,32 @@ async function handleSignUp(e: any) {
     const username = (document.getElementById('signupUsername') as HTMLInputElement).value;
     const email = (document.getElementById('signupEmail') as HTMLInputElement).value;
     const password = (document.getElementById('signupPass') as HTMLInputElement).value;
+    const conPassword = (document.getElementById('signupConPass') as HTMLInputElement).value;
+    const firstName = (document.getElementById('signupFname') as HTMLInputElement).value;
+    const lastName = (document.getElementById('signupLname') as HTMLInputElement).value;
 
+    if (password !== conPassword) {
+        errorSpan.textContent = 'Password and Confirm Password are not same'
+        errorSpan.classList.remove('hidden')
+        return;
+    }
+
+    if (!firstName.match(/^[a-zA-Z]+$/)) {
+        errorSpan.textContent = 'Please enter valid first name'
+        errorSpan.classList.remove('hidden')
+        return;
+    }
+
+    if (!lastName.match(/^[a-zA-Z]+$/)) {
+        errorSpan.textContent = 'Please enter valid last name'
+        errorSpan.classList.remove('hidden')
+        return;
+    }
 
     //1. to hide the error span when there was an error before
     errorSpan.classList.add('hidden')
 
-    //2. email and pass with user name store in the supabase
+    //2. email and pass with username store in the supabase
     let {error} = await supabase.auth.signUp({
         email,
         password,
@@ -107,7 +127,7 @@ async function handleSignUp(e: any) {
         }
     })
 
-    //3. if error in email or pass or user name remove hidden class from the error span then return to form
+    //3. if error in email or pass or username remove hidden class from the error span then return to form
     if (error) {
         //Password should contain at least one character of each: abcdefghijklmnopqrstuvwxyz, ABCDEFGHIJKLMNOPQRSTUVWXYZ, 0123456789, !@#$%^&*()_+-=[]{};':"|<>?,./`~.
         //User already registered
