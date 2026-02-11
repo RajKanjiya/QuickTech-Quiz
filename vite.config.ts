@@ -1,19 +1,15 @@
-import {resolve} from 'path';
-import {defineConfig} from 'vite';
+import {resolve} from "path";
+import {defineConfig} from "vite";
 
-// @ts-ignore
-// @ts-ignore
-// @ts-ignore
-// @ts-ignore
 export default defineConfig({
-    envDir: '../',
-    root: 'src',
+    root: "src", // Tells Vite that index.html is inside src
+    envDir: "./", // <--- FIX 1: Tells Vite to look for .env in the parent folder
     build: {
+        // @ts-ignore
+        publicDir: "../public", // <--- FIX 2: Tells Vite where the public assets are
+        outDir: "../dist", // Builds to a folder outside of src
+        emptyOutDir: true,
         rollupOptions: {
-            // @ts-ignore
-            publicDir: "../public",
-            outDir: "../dist", // Builds to a folder outside of src
-            emptyOutDir: true,
             input: {
                 main: resolve(__dirname, 'src/index.html'),
                 login: resolve(__dirname, 'src/Pages/login.html'),

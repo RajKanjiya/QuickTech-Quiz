@@ -5,8 +5,7 @@ const _supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
 const _supabaseKey: string = import.meta.env.VITE_SUPABASE_ANON_KEY// Use the ANON key, not service_role
 
 if (!_supabaseUrl || !_supabaseKey) {
-    alert("Missing Supabase environment variables!")
-    throw new Error("Missing Supabase environment variables!");
+    throw new Error("Something wants wrong!");
 }
 
 export const supabase = createClient(_supabaseUrl, _supabaseKey);
