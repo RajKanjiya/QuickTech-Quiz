@@ -19,7 +19,7 @@ const did = url.searchParams.get('did')
 
 //1. get question from the supabase
 const questions = await getQuestions()
-// console.log(questions)
+console.log(questions)
 
 //2. create array to store whether the answer is selected or not
 const selectedAnswers = Array.from({length: questions.length}).fill(-1)
@@ -58,29 +58,47 @@ function generateQuestion() {
 
     //3 display options
     questions[questionNo - 1].options.map((opt: any) => {
+        // console.log(typeof opt.option_text, opt.option_text)
+
         //3.1 if option is not selected then display all without any classes
         if (selectedAnswers[questionNo - 1] === -1) {
-            optionUl.innerHTML += `
-            <li class="option__text">${opt.option_text}</li>
-            `
+            const li = document.createElement('li')
+            li.className = "option__text"
+            li.textContent = opt.option_text;
+            optionUl.appendChild(li);
+            // optionUl.innerHTML += `
+            // <li class="option__text">${opt.option_text}</li>
+            // `
         }
         //3.2 else display question like this
         else {
             //3.2.1 if this is correct answer then add correct class to it
             if (opt.option_text === questions[questionNo - 1].correct_option_text) {
-                optionUl.innerHTML += `
-                <li class="option__text correct">${opt.option_text}</li>
-                `
+                const li = document.createElement('li')
+                li.className = "option__text correct"
+                li.textContent = opt.option_text;
+                optionUl.appendChild(li);
+                // optionUl.innerHTML += `
+                // <li class="option__text correct">${opt.option_text}</li>
+                // `
             }
             //3.2.2 if the selected ans is wrong then add wrong class
             else if (selectedAnswers[questionNo - 1] === opt.option_text) {
-                optionUl.innerHTML += `
-                    <li class="option__text wrong">${opt.option_text}</li>
-                `
+                const li = document.createElement('li')
+                li.className = "option__text wrong"
+                li.textContent = opt.option_text;
+                optionUl.appendChild(li);
+                // optionUl.innerHTML += `
+                //     <li class="option__text wrong">${opt.option_text}</li>
+                // `
             } else {
-                optionUl.innerHTML += `
-                    <li class="option__text">${opt.option_text}</li>
-                `
+                const li = document.createElement('li')
+                li.className = "option__text"
+                li.textContent = opt.option_text;
+                optionUl.appendChild(li);
+                // optionUl.innerHTML += `
+                //     <li class="option__text">${opt.option_text}</li>
+                // `
             }
             disableOptions()
         }
@@ -105,7 +123,7 @@ function handleSelectedQuestion(e: any) {
 
         //3.2 loop over the all lists and add correct class to the correct answer
         for (const li of lis) {
-            if (li.innerHTML === questions[questionNo - 1].correct_option_text) {
+            if (li.textContent === questions[questionNo - 1].correct_option_text) {
                 li.classList.add('correct')
                 break;
             }

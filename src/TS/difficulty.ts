@@ -6,7 +6,7 @@ const subjectDetails = document.getElementById('subject__details') as HTMLDivEle
 
 //1. get difficulty data from supabase and return array of object
 const difficulties = await getDifficulties() || {}
-// console.log(difficulties)
+console.log(difficulties)
 
 
 //2. set the subject name and logo
@@ -30,6 +30,7 @@ difficulties.map((diff: any) => {
             </div>
             <div class="diff__card__PTS">
                 +${diff.points_per_question} PTS / Correct
+                <span class="diff__card__PTS__time">${diff.time_limit_seconds} S / Question</span>
             </div>
         </div>
     `

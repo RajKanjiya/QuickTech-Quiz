@@ -122,10 +122,10 @@
     }
 
     &__PTS {
-      //display: flex;
-      //align-items: flex-end;
-      //justify-content: flex-end;
+      display: flex;
+      flex-direction: column;
       font-size: 1.5rem;
+      gap: .2rem;
       margin-left: auto;
       width: max-content;
 
@@ -134,11 +134,20 @@
       }
 
       @media screen and (max-width: 320px) {
-        text-align: right;
-        margin-left: auto;
-        //width: min-content;
+        font-size: 1.1rem;
+        width: 15rem;
       }
 
+      &__time {
+        align-self: flex-end;
+        font-size: 1.2rem;
+        color: rgba(0, 0, 0, 0.75);
+
+        @media screen and (max-width: 320px) {
+          font-size: 1rem;
+        }
+
+      }
     }
 
     &--Easy {

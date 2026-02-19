@@ -57,9 +57,9 @@ function handleCloseUserMenu(e: Event) {
         userMenu.classList.remove('slidInOut')
         greater.classList.remove('arrowDown')
         userMenu.classList.add('hidden')
+        document.removeEventListener('click', handleCloseUserMenu)
     }
 
-    document.removeEventListener('click', handleCloseUserMenu)
 }
 
 avatar.addEventListener('click', handleOpenUserMenu)
