@@ -8,6 +8,7 @@ const previousBtn = document.getElementById('btn-previous') as HTMLButtonElement
 const questionNoHTML = document.getElementById('question-no') as HTMLDivElement
 const questionText = document.getElementById('question-text') as HTMLDivElement
 const optionUl = document.getElementById('options-ul') as HTMLUListElement
+const frountBar = document.getElementById("front--bar") as HTMLDivElement
 let intervalID: number;
 let questionNo: number = 1;
 let correctAnswers: number = 0
@@ -19,7 +20,7 @@ const did = url.searchParams.get('did')
 
 //1. get question from the supabase
 const questions = await getQuestions()
-console.log(questions)
+// console.log(questions)
 
 //2. create array to store whether the answer is selected or not
 const selectedAnswers = Array.from({length: questions.length}).fill(-1)
@@ -103,6 +104,10 @@ function generateQuestion() {
             disableOptions()
         }
     })
+
+    // 4. change the bar width according to the question number
+    frountBar.style.width = `${(questionNo / questions.length) * 100}%`
+
 }
 
 //2. handle for next question and restart the interval

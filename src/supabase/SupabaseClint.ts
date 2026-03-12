@@ -1,7 +1,5 @@
 import {createClient} from '@supabase/supabase-js'
 // 1. Initialize
-// Replace these with your actual details from Supabase Settings -> API
-
 const _supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
 const _supabaseKey: string = import.meta.env.VITE_SUPABASE_ANON_KEY
 
