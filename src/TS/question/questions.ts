@@ -1,5 +1,7 @@
 import getQuestions from "../functions/getQuestions.ts";
 import handleUploadQuizResult from "../functions/handleUploadQuizResult.ts";
+import $ from "jquery";
+
 
 const timer = document.getElementById('time') as HTMLSpanElement
 const options = document.getElementsByTagName('li')
@@ -39,7 +41,7 @@ let timerForQuestion = Number(questions[0].time_limit_seconds) * questions.lengt
 generateQuestion()
 startInterval()
 
-//6. check for click event
+//6. check for click events
 nextBtn.addEventListener('click', handleNextBtn)
 previousBtn.addEventListener('click', handlePreviousBtn)
 optionUl.addEventListener('click', handleSelectedQuestion)
@@ -56,52 +58,27 @@ function generateQuestion() {
     //2. display question
     questionText.textContent = `${questions[questionNo - 1].question_text}`
 
-
     //3 display options
     questions[questionNo - 1].options.map((opt: any) => {
-        // console.log(typeof opt.option_text, opt.option_text)
-
         //3.1 if option is not selected then display all without any classes
-        if (selectedAnswers[questionNo - 1] === -1) {
-            const li = document.createElement('li')
-            li.className = "option__text"
-            li.textContent = opt.option_text;
-            optionUl.appendChild(li);
-            // optionUl.innerHTML += `
-            // <li class="option__text">${opt.option_text}</li>
-            // `
-        }
+        if (selectedAnswers[questionNo - 1] === -1)
+            $("#options-ul").append(`<li class="option__text">${opt.option_text}</li>`)
+            // optionUl.innerHTML += `<li class="option__text">${opt.option_text}</li>`
+
         //3.2 else display question like this
         else {
             //3.2.1 if this is correct answer then add correct class to it
-            if (opt.option_text === questions[questionNo - 1].correct_option_text) {
-                const li = document.createElement('li')
-                li.className = "option__text correct"
-                li.textContent = opt.option_text;
-                optionUl.appendChild(li);
-                // optionUl.innerHTML += `
-                // <li class="option__text correct">${opt.option_text}</li>
-                // `
-            }
+            if (opt.option_text === questions[questionNo - 1].correct_option_text)
+                $("#options-ul").append(`<li class="option__text correct">${opt.option_text}</li>`)
+                // optionUl.innerHTML += `<li class="option__text correct">${opt.option_text}</li>`
             //3.2.2 if the selected ans is wrong then add wrong class
-            else if (selectedAnswers[questionNo - 1] === opt.option_text) {
-                const li = document.createElement('li')
-                li.className = "option__text wrong"
-                li.textContent = opt.option_text;
-                optionUl.appendChild(li);
-                // optionUl.innerHTML += `
-                //     <li class="option__text wrong">${opt.option_text}</li>
-                // `
-            } else {
-                const li = document.createElement('li')
-                li.className = "option__text"
-                li.textContent = opt.option_text;
-                optionUl.appendChild(li);
-                // optionUl.innerHTML += `
-                //     <li class="option__text">${opt.option_text}</li>
-                // `
-            }
-            disableOptions()
+            else if (selectedAnswers[questionNo - 1] === opt.option_text)
+                $("#options-ul").append(`<li class="option__text wrong">${opt.option_text}</li>`)
+            // optionUl.innerHTML += `<li class="option__text wrong">${opt.option_text}</li>`
+            else
+                $("#options-ul").append(`<li class="option__text">${opt.option_text}</li>`)
+            // optionUl.innerHTML += `<li class="option__text">${opt.option_text}</li>`
+            _disableOptions()
         }
     })
 
@@ -138,7 +115,7 @@ function handleSelectedQuestion(e: any) {
     }
 
     //4. disable all the options
-    disableOptions()
+    _disableOptions()
 
     //5. update selectedAnswers to selected one
     selectedAnswers[questionNo - 1] = e.target.textContent
@@ -243,7 +220,7 @@ function startInterval() {
     intervalID = setInterval(handleTimer, 1000)
 }
 
-// decrease time by 1 in html
+// decrease time by 1 in HTML
 function handleTimer() {
     timer.textContent = timerForQuestion.toString()
     timerForQuestion--
@@ -252,7 +229,7 @@ function handleTimer() {
     if (Number(timer.textContent) <= 0) {
         timer.textContent = '00:00'
         clearInterval(intervalID)
-        disableOptions()
+        _disableOptions()
         alert("Your time is over")
         handleFinishScreen()
     } else {
@@ -261,7 +238,7 @@ function handleTimer() {
 }
 
 //when time is 00 then disable all options and enable next btn
-function disableOptions() {
+function _disableOptions() {
     for (let li of options) {
         li.classList.add('li-disabled')
     }
