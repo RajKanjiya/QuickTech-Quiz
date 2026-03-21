@@ -100,7 +100,7 @@
       border: 1px solid #9bacc6;
       border-radius: 10px;
       transition: all .3s;
-      //cursor: not-allowed;
+      cursor: pointer;
 
       &:hover {
         background-color: rgba(136, 182, 250, 0.3);
@@ -155,7 +155,6 @@
 }
 
 .li-disabled {
-  cursor: not-allowed;
   pointer-events: none;
 }
 

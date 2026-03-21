@@ -188,6 +188,21 @@
   }
 }
 
+.passShowHide {
+  position: relative;
+
+  input {
+    width: 100%;
+  }
+
+  svg {
+    cursor: pointer;
+    z-index: 1000;
+    position: absolute;
+    bottom: 15px;
+    right: 16px;
+  }
+}
 
 //this is login form
 .loginForm {

@@ -5,7 +5,7 @@ import {supabase} from "../../supabase/SupabaseClint.ts";
 
 export default async function handleUploadQuizResult(subjectId: string | null, difficultyId: string | null, score: number, correctAnswers: number, totalQuestions: any, timeTaken: number) {
 
-    console.log(subjectId, difficultyId, score, correctAnswers, totalQuestions, timeTaken)
+    // console.log(subjectId, difficultyId, score, correctAnswers, totalQuestions, timeTaken)
 
 
     const {data: {user}} = await supabase.auth.getUser();

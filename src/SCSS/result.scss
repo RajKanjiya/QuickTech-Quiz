@@ -1,0 +1,145 @@
+// 1. SCSS Variables for your Color Palette
+$bg-color: #f0f4f8;
+$card-bg: #ffffff;
+$primary-blue: #2563eb;
+$light-blue: #dbeafe;
+$text-dark: #1e293b;
+$text-muted: #64748b;
+
+// 2. Mixins for reusable code
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 3. Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// 4. Base Styles & Nesting
+//body {
+//  background-color: $bg-color;
+//  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+//  @include flex-center;
+//  min-height: 100vh;
+//  margin: 0;
+//}
+
+.dashboard-card {
+  background-color: $card-bg;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 24px;
+  overflow: hidden;
+  // SCSS allows us to pass a color variable directly into rgba()
+  box-shadow: 0 15px 35px rgba($primary-blue, 0.08);
+  animation: fadeIn 0.4s ease-out;
+
+  /* --- Top Banner Hero Section --- */
+  .card-hero {
+    background-color: $primary-blue;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+
+    .status-pill {
+      background-color: rgba(#ffffff, 0.2); // SCSS shorthand for white with opacity
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .hero-title {
+      margin: 0 0 10px 0;
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+
+    .big-score {
+      font-size: 4.5rem;
+      font-weight: 800;
+      margin: 0;
+      line-height: 1;
+
+      span {
+        font-size: 2rem;
+        font-weight: 500;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  /* --- Stats Grid Section --- */
+  .stats-container {
+    padding: 30px;
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 30px;
+
+      .stat-box {
+        background-color: $light-blue;
+        padding: 15px;
+        border-radius: 16px;
+        text-align: center;
+
+        .stat-label {
+          display: block;
+          color: $text-muted;
+          font-size: 1.3rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          margin-bottom: 5px;
+        }
+
+        .stat-value {
+          color: $primary-blue;
+          font-size: 1.7rem;
+          font-weight: 700;
+        }
+      }
+    }
+
+    /* --- Action Button --- */
+    .btn-primary {
+      background-color: $card-bg;
+      color: $primary-blue;
+      border: 2px solid $primary-blue;
+      padding: 14px;
+      width: 100%;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      // The '&' refers to the parent selector (.btn-primary)
+      &:hover {
+        background-color: $primary-blue;
+        color: white;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}

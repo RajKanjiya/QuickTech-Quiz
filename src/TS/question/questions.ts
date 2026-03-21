@@ -15,6 +15,8 @@ let intervalID: number;
 let questionNo: number = 1;
 let correctAnswers: number = 0
 let totalTakenSecond: number = 0
+let scores: number = 0;
+let totalQuestions: number = 0;
 
 const url = new URL(window.location.href)
 const sid = url.searchParams.get('sid')
@@ -22,6 +24,7 @@ const did = url.searchParams.get('did')
 
 //1. get question from the supabase
 const questions = await getQuestions()
+totalQuestions = questions.length;
 // console.log(questions)
 
 //2. create array to store whether the answer is selected or not
@@ -69,14 +72,14 @@ function generateQuestion() {
         else {
             //3.2.1 if this is correct answer then add correct class to it
             if (opt.option_text === questions[questionNo - 1].correct_option_text)
-                $("#options-ul").append(`<li class="option__text correct">${opt.option_text}</li>`)
+                $("#options-ul").append(`<li class=" correct">${opt.option_text}</li>`)
                 // optionUl.innerHTML += `<li class="option__text correct">${opt.option_text}</li>`
             //3.2.2 if the selected ans is wrong then add wrong class
             else if (selectedAnswers[questionNo - 1] === opt.option_text)
-                $("#options-ul").append(`<li class="option__text wrong">${opt.option_text}</li>`)
+                $("#options-ul").append(`<li class=" wrong">${opt.option_text}</li>`)
             // optionUl.innerHTML += `<li class="option__text wrong">${opt.option_text}</li>`
             else
-                $("#options-ul").append(`<li class="option__text">${opt.option_text}</li>`)
+                $("#options-ul").append(`<li class="">${opt.option_text}</li>`)
             // optionUl.innerHTML += `<li class="option__text">${opt.option_text}</li>`
             _disableOptions()
         }
@@ -131,6 +134,8 @@ function handleFinishScreen() {
         }
     }
 
+    scores = Number(correctAnswers) * Number(questions[0].points_per_question);
+
     //2. change the timer and question no text
     questionNoHTML.textContent = `Completed`
     timer.textContent = '00:00'
@@ -143,17 +148,40 @@ function handleFinishScreen() {
     questionText.textContent = ''
     nextBtn.classList.add('hidden')
     previousBtn.classList.add('hidden')
+
     // @ts-ignore
-    document.getElementById('question__body__id').innerHTML = `
-    <div class="finalBox" id="finish">
-            <div class="pill">Quiz Completed 🎉</div>
-            <div class="final-score"><span id="correct-question">${correctAnswers}</span>/<span id="total-questions">${questions.length}</span></div>
-            <div class="pill">Points Earned : <span id="final__Points">${(Number(correctAnswers) * Number(questions[0].points_per_question))}</span></div>
-            <a class="" href="src/index.html">Home</a>
-        </div>`
+//     document.getElementById('question__body__id').innerHTML = `
+//     <div class="dashboard-card">
+//     <div class="card-hero">
+//         <div class="status-pill">Completed</div>
+//         <h2 class="hero-title">Great Effort! 🎉</h2>
+//         <div class="big-score">9<span>/30</span></div>
+//     </div>
+//
+//     <div class="stats-container">
+//         <div class="stats-grid">
+//             <div class="stat-box">
+//                 <span class="stat-label">Time Taken</span>
+//                 <span class="stat-value">00:00</span>
+//             </div>
+//             <div class="stat-box">
+//                 <span class="stat-label">Points Earned</span>
+//                 <span class="stat-value">90</span>
+//             </div>
+//         </div>
+//
+//         <button class="btn-primary">Back to Home</button>
+//     </div>
+// </div>
+// `
 
     //5. upload the result data to DB
-    handleUploadQuizResult(sid, did, (Number(correctAnswers) * Number(questions[0].points_per_question)), correctAnswers, questions.length, totalTakenSecond)
+    handleUploadQuizResult(sid, did, scores, correctAnswers, questions.length, totalTakenSecond)
+
+
+    localStorage.setItem("quizResult", JSON.stringify({scores, totalQuestions, totalTakenSecond, correctAnswers}))
+
+    window.location.href = "/Pages/result.html"
 }
 
 //4. this function handle next btn
@@ -181,7 +209,7 @@ function handleNextBtn() {
             return;
         }
 
-        //1.3 then display the result
+        //1.3 then display the result.scss
         handleFinishScreen()
     }
 

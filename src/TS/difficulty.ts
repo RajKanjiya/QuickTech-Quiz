@@ -6,7 +6,6 @@ const subjectDetails = document.getElementById('subject__details') as HTMLDivEle
 
 //1. get difficulty data from supabase and return array of object
 const difficulties = await getDifficulties() || {}
-console.log(difficulties)
 
 
 //2. set the subject name and logo
@@ -52,7 +51,7 @@ cards__container.addEventListener('click', (e) => {
 
     const currentParam = window.location.search || ''
 
-    //4.3 if there was a parameter the add to the next page
+    //4.3 if there was a parameter then add to the next page
     if (currentParam) {
         //4.4 get the next page url and then add the current parameter
         const destinationUrl = '/Pages/questions.html' + currentParam

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="/SCSS/style.scss" rel="stylesheet">
+    <title>Result</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-card">
+    <div class="card-hero">
+        <div class="status-pill">Completed</div>
+        <h2 class="hero-title">Great Effort! 🎉</h2>
+        <div class="big-score" id="correct-questions">9<span id="total-questions">/30</span></div>
+    </div>
+
+    <div class="stats-container">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-label">Time Taken</span>
+                <span class="stat-value" id="time-taken">00:00</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Points Earned</span>
+                <span class="stat-value" id="pointsEarned">90</span>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="back-home">Back to Home</button>
+    </div>
+</div>
+<script src="/TS/result.ts" type="module"></script>
+</body>
+</html>
