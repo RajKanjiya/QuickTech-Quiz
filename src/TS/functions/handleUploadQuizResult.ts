@@ -7,7 +7,6 @@ export default async function handleUploadQuizResult(subjectId: string | null, d
 
     // console.log(subjectId, difficultyId, score, correctAnswers, totalQuestions, timeTaken)
 
-
     const {data: {user}} = await supabase.auth.getUser();
 
     const {error} = await supabase
@@ -23,7 +22,6 @@ export default async function handleUploadQuizResult(subjectId: string | null, d
 
     if (error) {
         alert('Error happen while submitting')
-        console.error(error)
     }
     // else console.log("Attempt saved! Attempt ID:", data)
 

@@ -10,7 +10,7 @@ const previousBtn = document.getElementById('btn-previous') as HTMLButtonElement
 const questionNoHTML = document.getElementById('question-no') as HTMLDivElement
 const questionText = document.getElementById('question-text') as HTMLDivElement
 const optionUl = document.getElementById('options-ul') as HTMLUListElement
-const frountBar = document.getElementById("front--bar") as HTMLDivElement
+const frontBar = document.getElementById("front--bar") as HTMLDivElement
 let intervalID: number;
 let questionNo: number = 1;
 let correctAnswers: number = 0
@@ -55,6 +55,7 @@ optionUl.addEventListener('click', handleSelectedQuestion)
 
 //1. function to generate question
 function generateQuestion() {
+
     //1. change the question number
     questionNoHTML.textContent = `Question: ${questionNo} / ${questions.length}`
 
@@ -63,30 +64,38 @@ function generateQuestion() {
 
     //3 display options
     questions[questionNo - 1].options.map((opt: any) => {
+        const li = document.createElement('li');
+        li.classList.add("option__text")
         //3.1 if option is not selected then display all without any classes
-        if (selectedAnswers[questionNo - 1] === -1)
-            $("#options-ul").append(`<li class="option__text">${opt.option_text}</li>`)
+        if (selectedAnswers[questionNo - 1] === -1) {
+            li.innerText = opt.option_text;
+            $("#options-ul").append(li)
             // optionUl.innerHTML += `<li class="option__text">${opt.option_text}</li>`
+        }
 
         //3.2 else display question like this
         else {
+            li.innerText = opt.option_text;
             //3.2.1 if this is correct answer then add correct class to it
-            if (opt.option_text === questions[questionNo - 1].correct_option_text)
-                $("#options-ul").append(`<li class=" correct">${opt.option_text}</li>`)
+            if (opt.option_text === questions[questionNo - 1].correct_option_text) {
+                li.classList.add('correct')
+                $("#options-ul").append(li)
                 // optionUl.innerHTML += `<li class="option__text correct">${opt.option_text}</li>`
+            }
             //3.2.2 if the selected ans is wrong then add wrong class
-            else if (selectedAnswers[questionNo - 1] === opt.option_text)
-                $("#options-ul").append(`<li class=" wrong">${opt.option_text}</li>`)
-            // optionUl.innerHTML += `<li class="option__text wrong">${opt.option_text}</li>`
-            else
-                $("#options-ul").append(`<li class="">${opt.option_text}</li>`)
-            // optionUl.innerHTML += `<li class="option__text">${opt.option_text}</li>`
+            else if (selectedAnswers[questionNo - 1] === opt.option_text) {
+                li.classList.add('wrong')
+                $("#options-ul").append(li)
+                // optionUl.innerHTML += `<li class="option__text wrong">${opt.option_text}</li>`
+            } else {
+                $("#options-ul").append(li)
+            }
             _disableOptions()
         }
     })
 
     // 4. change the bar width according to the question number
-    frountBar.style.width = `${(questionNo / questions.length) * 100}%`
+    frontBar.style.width = `${(questionNo / questions.length) * 100}%`
 
 }
 
@@ -122,11 +131,25 @@ function handleSelectedQuestion(e: any) {
 
     //5. update selectedAnswers to selected one
     selectedAnswers[questionNo - 1] = e.target.textContent
+
+    if (questionNo < questions.length) {
+        setTimeout(() => {
+            questionNo++
+            optionUl.innerHTML = ''
+            generateQuestion()
+        }, 500)
+    }
+
+    if (questionNo == questions.length) {
+        nextBtn.innerHTML = 'Finish'
+    } else {
+        nextBtn.innerHTML = 'Next'
+    }
 }
 
 
 //3. this function handle finish screen or score screen
-function handleFinishScreen() {
+async function handleFinishScreen() {
     //1. check all selected answers and increase correctAnswers by 1
     for (let i = 0; i < questions.length; i++) {
         if (selectedAnswers[i] == questions[i].correct_option_text) {
@@ -136,50 +159,26 @@ function handleFinishScreen() {
 
     scores = Number(correctAnswers) * Number(questions[0].points_per_question);
 
-    //2. change the timer and question no text
-    questionNoHTML.textContent = `Completed`
-    timer.textContent = '00:00'
-
-    //3. clear both timer
+    // //2. change the timer and question no text
+    // questionNoHTML.textContent = `Completed`
+    // timer.textContent = '00:00'
+    //
+    // //3. clear both timer
     clearInterval(intervalID)
     clearInterval(totalTimerId)
+    //
+    // //4. clear the question and next and previous btns
+    // questionText.textContent = ''
+    // nextBtn.classList.add('hidden')
+    // previousBtn.classList.add('hidden')
 
-    //4. clear the question and next and previous btns
-    questionText.textContent = ''
-    nextBtn.classList.add('hidden')
-    previousBtn.classList.add('hidden')
-
-    // @ts-ignore
-//     document.getElementById('question__body__id').innerHTML = `
-//     <div class="dashboard-card">
-//     <div class="card-hero">
-//         <div class="status-pill">Completed</div>
-//         <h2 class="hero-title">Great Effort! 🎉</h2>
-//         <div class="big-score">9<span>/30</span></div>
-//     </div>
-//
-//     <div class="stats-container">
-//         <div class="stats-grid">
-//             <div class="stat-box">
-//                 <span class="stat-label">Time Taken</span>
-//                 <span class="stat-value">00:00</span>
-//             </div>
-//             <div class="stat-box">
-//                 <span class="stat-label">Points Earned</span>
-//                 <span class="stat-value">90</span>
-//             </div>
-//         </div>
-//
-//         <button class="btn-primary">Back to Home</button>
-//     </div>
-// </div>
-// `
 
     //5. upload the result data to DB
-    handleUploadQuizResult(sid, did, scores, correctAnswers, questions.length, totalTakenSecond)
+    await handleUploadQuizResult(sid, did, scores, correctAnswers, questions.length, totalTakenSecond)
 
+    sessionStorage.setItem("quizResult", JSON.stringify({scores, totalQuestions, totalTakenSecond, correctAnswers}))
 
-    localStorage.setItem("quizResult", JSON.stringify({scores, totalQuestions, totalTakenSecond, correctAnswers}))
+    sessionStorage.removeItem('userData')
 
     window.location.href = "/Pages/result.html"
 }

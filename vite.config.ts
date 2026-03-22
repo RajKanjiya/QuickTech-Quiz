@@ -17,6 +17,7 @@ export default defineConfig({
                 difficulty: resolve(__dirname, 'src/Pages/difficulty.html'),
                 question: resolve(__dirname, 'src/Pages/questions.html'),
                 result: resolve(__dirname, 'src/Pages/result.html'),
+                leaderboard: resolve(__dirname, 'src/Pages/leaderboard.html'),
             },
         },
     },

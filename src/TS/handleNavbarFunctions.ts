@@ -19,10 +19,21 @@ interface UserDetails {
     total_points: number
 }
 
+
 //function to check user is auth or not
 (async function () {
-    //1. get user data
-    const data = await getUserDetails() as UserDetails
+
+    let data;
+    const localData: string | null = sessionStorage.getItem('userData')
+    if (localData != null) {
+        data = JSON.parse(localData)
+    } else {
+        //1. get user data
+        data = await getUserDetails() as UserDetails
+        sessionStorage.removeItem('userData')
+        sessionStorage.setItem("userData", JSON.stringify(data))
+    }
+
 
     // 2. if user not found then send user to the login page
     if (!data) {

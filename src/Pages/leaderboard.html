@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>QuickTech-quiz</title>
+    <title>QuickTech-quiz | Leaderboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="/SCSS/style.scss" rel="stylesheet">
 </head>
-<body style="overflow: hidden">
+<body>
 
 <nav class="navbar">
-    <div class="logo">
+    <div class="logo" id="logo">
         <i class="fas fa-brain"></i> QuickTech-quiz
     </div>
 
@@ -57,6 +57,7 @@
                       stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
             </svg>
             Home
+            <!--            <a href="#">Dashboard</a>-->
         </a>
         <a class="user--menu__leaderboard menus" href="/Pages/leaderboard.html">
             <svg fill="none" height="800px" viewBox="0 0 24 24" width="800px" xmlns="http://www.w3.org/2000/svg">
@@ -84,35 +85,90 @@
     <!--    <button class=" btn user-login hidden">Login</button>-->
 </nav>
 
-<header class="hero">
-    <div class="hero-container">
+<main class="main-content">
+    <div class="leaderboard-card">
 
-        <div class="hero-text">
-            <h1>Master Your Tech Skills</h1>
-            <p>Challenge yourself with our curated quizzes. Level up your programming knowledge today.</p>
-            <a class="cta-btn" href="/Pages/subjects.html">Start Playing Now</a>
+        <div class="card-left">
+            <div class="top-section">
+                <h1 class="title">Top Performers</h1>
+                <div class="podium-container">
+                    <div class="podium-container" id="podium-container">
+                        <div class="podium-item rank-2">
+                            <div class="avatar-wrapper">
+                                <div class="crown">👑</div>
+                                <div class="avatar"></div>
+                                <div class="medal">2</div>
+                            </div>
+                            <div class="podium-block">
+                                <div class="podium-name">Name</div>
+                                <div class="podium-score">PTS</div>
+                            </div>
+                        </div>
+
+                        <div class="podium-item rank-1">
+                            <div class="avatar-wrapper">
+                                <div class="crown">👑</div>
+                                <div class="avatar"></div>
+                                <div class="medal" style="color: var(--gold)">1</div>
+                            </div>
+                            <div class="podium-block">
+                                <div class="podium-name">Name</div>
+                                <div class="podium-score">PTS</div>
+                            </div>
+                        </div>
+
+                        <div class="podium-item rank-3">
+                            <div class="avatar-wrapper">
+                                <div class="crown">👑</div>
+                                <div class="avatar"></div>
+                                <div class="medal">3</div>
+                            </div>
+                            <div class="podium-block">
+                                <div class="podium-name">Name</div>
+                                <div class="podium-score">PTS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="hero-visual">
-            <div class="visual-box">
-                <i class="fa-solid fa-laptop-code main-icon"></i>
-
-                <div class="floating-card card-top">
-                    <i class="fa-solid fa-check-circle icon-success"></i>
-                    <span>100% Score</span>
+        <div class="card-right">
+            <div class="sticky-user" id="sticky-user">
+                <span class="name">Name</span>
+                <div class="rank-center">
+                    <span class="rank">Rank</span>
                 </div>
+                <span class="score">PTS</span>
+            </div>
 
-                <div class="floating-card card-bottom">
-                    <i class="fa-brands fa-js icon-js"></i>
-                    <span>JS Master</span>
+            <div class="list-section">
+                <h2 class="list-title">Rankings</h2>
+                <div class="scroll-container" id="rank-container">
+                    <!--                    <div class="list-item">-->
+                    <!--                        <div class="item-left">-->
+                    <!--                            <span class="rank-bubble">4</span>-->
+                    <!--                            <span class="item-name">ALICE</span>-->
+                    <!--                        </div>-->
+                    <!--                        <span class="item-score">590 PTS</span>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="list-item highlight">-->
+                    <!--                        <div class="item-left">-->
+                    <!--                            <span class="rank-bubble">12</span>-->
+                    <!--                            <span>🧑</span>-->
+                    <!--                            <span class="item-name">DEV</span>-->
+                    <!--                        </div>-->
+                    <!--                        <span class="item-score">430 PTS</span>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
 
     </div>
-</header>
+</main>
 
 <script src="/TS/handleNavbarFunctions.ts" type="module"></script>
+<script src="/TS/leaderboard.ts" type="module"></script>
 <script src="/TS/auth/logOut.ts" type="module"></script>
 </body>
 </html>

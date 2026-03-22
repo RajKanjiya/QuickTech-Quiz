@@ -3,7 +3,7 @@ const timeTaken = document.getElementById("time-taken") as HTMLSpanElement;
 const pointsEarned = document.getElementById("pointsEarned") as HTMLSpanElement;
 const backHome = document.getElementById("back-home") as HTMLButtonElement;
 
-const resultDta = localStorage.getItem("quizResult");
+const resultDta = sessionStorage.getItem("quizResult");
 
 interface Data {
     correctAnswers: number

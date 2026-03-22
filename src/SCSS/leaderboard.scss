@@ -1,0 +1,514 @@
+// =========================================
+// 1. SCSS Variables (Brand & Layout Colors)
+// =========================================
+$bg-color: #f0f4f8;
+$card-bg: #ffffff;
+$primary-blue: #009efd; // Gradient hero match
+$dark-blue: #2563eb;
+$light-blue: #dbeafe;
+$highlight-bg: #eff6ff;
+$text-dark: #1e293b;
+$text-muted: #64748b;
+$nav-border: #e2e8f0;
+
+// Podium Colors
+$podium-1: #bfdbfe;
+$podium-2: #dbeafe;
+$podium-3: #eff6ff;
+$gold: #fbbf24;
+$silver: #cbd5e1;
+$bronze: #b45309;
+
+// =========================================
+// 2. Mixins (Reusable Utility Code)
+// =========================================
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $silver transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $silver;
+    border-radius: 10px;
+  }
+}
+
+// =========================================
+// 3. Base Styles
+// =========================================
+//body {
+//  background-color: $bg-color;
+//  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+//  margin: 0;
+//  padding: 0;
+//  display: flex;
+//  flex-direction: column;
+//  min-height: 100vh;
+//  box-sizing: border-box;
+//}
+
+// =========================================
+// 4. Navbar Component
+// =========================================
+//.navbar {
+//  @include flex-between;
+//  background-color: #ffffff;
+//  height: 70px;
+//  padding: 0 5%;
+//  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+//  position: sticky;
+//  top: 0;
+//  z-index: 100;
+//
+//  .nav-left {
+//    display: flex;
+//    align-items: center;
+//    gap: 10px;
+//    text-decoration: none;
+//
+//    .logo-icon {
+//      color: $primary-blue;
+//      font-size: 1.8rem;
+//    }
+//
+//    .logo-text {
+//      color: $dark-blue;
+//      font-size: 1.4rem;
+//      font-weight: 800;
+//      letter-spacing: -0.5px;
+//    }
+//  }
+//
+//  .nav-right {
+//    display: flex;
+//    align-items: center;
+//    gap: 20px;
+//
+//    .score-badge {
+//      background-color: #fffbeb;
+//      border: 1px solid #fef3c7;
+//      color: #d97706;
+//      padding: 5px 12px;
+//      border-radius: 20px;
+//      font-weight: 700;
+//      font-size: 0.85rem;
+//      display: flex;
+//      align-items: center;
+//      gap: 5px;
+//    }
+//
+//    .user-greeting {
+//      color: $text-dark;
+//      font-weight: 600;
+//      font-size: 0.95rem;
+//      display: none; // Hidden on mobile
+//
+//      @media (min-width: 600px) {
+//        display: block; // Visible on tablet/desktop
+//      }
+//    }
+//
+//    .user-avatar {
+//      width: 40px;
+//      height: 40px;
+//      border-radius: 50%;
+//      background-color: $light-blue;
+//      @include flex-center;
+//      font-size: 1.2rem;
+//      border: 2px solid white;
+//      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+//    }
+//  }
+//}
+
+// =========================================
+// 5. Main Content Wrapper
+// =========================================
+.main-content {
+  flex-grow: 1;
+  @include flex-center;
+  padding: 18px 10px;
+
+  @media (min-width: 992px) {
+    padding: 18px 20px;
+  }
+}
+
+// =========================================
+// 6. Leaderboard Component
+// =========================================
+.leaderboard-card {
+  background-color: $card-bg;
+  width: 100%;
+  max-width: 600px; // Default for mobile/tablet
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba($primary-blue, 0.08); // SCSS hex+opacity magic
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 110px);
+  transition: all 0.3s ease;
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+    max-width: 1000px;
+    height: 650px;
+  }
+
+  .card-left, .card-right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // --- Left Side (Podium) ---
+  .card-left {
+    @media (min-width: 992px) {
+      width: 50%;
+      justify-content: center;
+      border-right: 1px solid $nav-border;
+      background: linear-gradient(180deg, #ffffff 0%, $bg-color 100%);
+    }
+
+    .top-section {
+      padding: 30px 20px 0;
+      text-align: center;
+
+      @media (min-width: 992px) {
+        padding: 0 30px;
+      }
+
+      .title {
+        color: $dark-blue;
+        font-size: 1.5rem;
+        margin: 0 0 30px 0;
+        font-weight: 800;
+
+        // Increase size on desktop
+        @media (min-width: 992px) {
+          font-size: 2.2rem; // WAS: 1.8rem
+          margin-bottom: 40px;
+        }
+      }
+
+      .podium-container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 10px;
+        padding-bottom: 20px;
+
+        @media (min-width: 992px) {
+          padding-bottom: 0;
+        }
+
+        .podium-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 60%;
+
+          .avatar-wrapper {
+            position: relative;
+            margin-bottom: -15px;
+            z-index: 2;
+
+            .avatar {
+              width: 50px;
+              height: 50px;
+              background-color: $light-blue;
+              border-radius: 50%;
+              @include flex-center;
+              font-size: 1.5rem;
+              border: 3px solid white;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            }
+
+            .medal {
+              position: absolute;
+              bottom: -5px;
+              right: -5px;
+              background: white;
+              border-radius: 50%;
+              width: 22px;
+              height: 22px;
+              @include flex-center;
+              font-size: 1rem;
+              font-weight: bold;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            // *** CROWN ADDED BACK HERE ***
+            .crown {
+              position: absolute;
+              top: -22px; // Sits above the avatar
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 1.5rem; // Adjust size
+              color: $gold; // Set color
+            }
+          }
+
+          .podium-block {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 8px 8px 0 0;
+            padding: 20px 5px 10px;
+            color: $text-dark;
+            text-align: center;
+
+            @media (min-width: 992px) {
+              padding: 30px 10px 15px;
+            }
+
+            .podium-name {
+              font-size: 1.4rem;
+              font-weight: 700;
+              margin-top: 10px;
+              word-break: break-word;
+
+              // Increase size on desktop
+              @media (min-width: 992px) {
+                font-size: 1.4rem;
+              }
+              // WAS: 0.9rem
+            }
+
+            .podium-score {
+              font-size: 1rem;
+              color: $text-muted;
+              margin-top: 2px;
+
+              // Increase size on desktop
+              @media (min-width: 992px) {
+                font-size: 1rem;
+              }
+              // WAS: 0.85rem
+            }
+          }
+
+          // Rank Specific Styling overrides
+          &.rank-1 {
+            .avatar {
+              width: 65px;
+              height: 65px;
+              border-color: $gold;
+              font-size: 2rem;
+            }
+
+            .medal {
+              color: $gold;
+            }
+
+            .podium-block {
+              height: 110px;
+              background-color: $podium-1;
+              font-weight: bold;
+              @media (min-width: 992px) {
+                height: 140px;
+              }
+            }
+          }
+
+          &.rank-2 {
+            .avatar {
+              border-color: $silver;
+            }
+
+            .podium-block {
+              height: 80px;
+              background-color: $podium-2;
+              @media (min-width: 992px) {
+                height: 100px;
+              }
+            }
+          }
+
+          &.rank-3 {
+            .avatar {
+              border-color: $bronze;
+            }
+
+            .podium-block {
+              height: 60px;
+              background-color: $podium-3;
+              @media (min-width: 992px) {
+                height: 75px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // --- Right Side (List & Sticky Bar) ---
+  .card-right {
+    flex-grow: 1;
+    overflow: hidden;
+
+    @media (min-width: 992px) {
+      width: 50%;
+      background-color: $card-bg;
+    }
+
+    .sticky-user {
+      background-color: $light-blue;
+      padding: 15px 25px;
+      @include flex-between;
+      font-weight: 700;
+      //border-top: 2px solid white;
+      border-bottom: 2px solid white;
+      z-index: 10;
+
+      .name {
+        font-size: 1.4rem;
+        width: 80px;
+        @media (min-width: 992px) {
+          font-size: 2rem;
+        }
+      }
+
+      .score {
+        color: $dark-blue;
+        width: 80px;
+        text-align: right;
+        @media (min-width: 992px) {
+          font-size: 2rem;
+        }
+      }
+
+      .rank-center {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .rank {
+          font-size: 1.4rem;
+          @media (min-width: 992px) {
+            font-size: 2rem;
+          }
+        }
+
+        .user-avatar { // Reusing avatar style but stripping border/shadow
+          width: 35px;
+          height: 35px;
+          border: none;
+          box-shadow: none;
+          background-color: transparent;
+          @include flex-center;
+          font-size: 1.2rem;
+          @media (min-width: 992px) {
+            width: 45px;
+            height: 45px;
+          }
+        }
+      }
+    }
+
+    .list-section {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+
+      .list-title {
+        text-align: center;
+        color: $dark-blue;
+        font-size: 1.5rem;
+        margin: 15px 0;
+        font-weight: 600;
+
+        @media (min-width: 992px) {
+          font-size: 2rem;
+        }
+      }
+
+      .scroll-container {
+        overflow-y: auto;
+        padding: 0 20px 20px;
+        flex-grow: 1;
+        @include custom-scrollbar;
+
+        .list-item {
+          @include flex-between;
+          padding: 12px 15px;
+          border-radius: 12px;
+          margin-bottom: 8px;
+          background-color: #f8fafc;
+          transition: transform 0.2s;
+
+          &:hover {
+            transform: translateX(4px);
+          }
+
+          .item-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .rank-bubble {
+              background-color: $primary-blue;
+              color: white;
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              @include flex-center;
+              font-size: 1.3rem;
+              font-weight: bold;
+
+              @media (min-width: 992px) {
+                width: 32px;
+                height: 32px;
+                font-size: 1.4rem;
+              }
+            }
+
+            .item-name {
+              font-weight: 600;
+              font-size: 1.2rem;
+              @media (min-width: 992px) {
+                font-size: 1.5rem;
+              }
+            }
+          }
+
+          .item-score {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: $text-muted;
+            @media (min-width: 992px) {
+              font-size: 1.5rem;
+            }
+          }
+
+          // Highlighted Active User Match
+          &.highlight {
+            background-color: $highlight-bg;
+            border: 2px solid rgba($primary-blue, 0.4);
+
+            .item-score {
+              color: $dark-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -70,6 +70,8 @@ async function handleLogin(e: Event) {
 
     //4. email and pass is correct the see this alert
     alert('login successfully!')
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("quizResult");
 
 
     //5. then go to the home/dashboard page
